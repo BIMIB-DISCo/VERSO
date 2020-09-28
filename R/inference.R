@@ -1,5 +1,5 @@
 # learn VERSO phylogenetic tree from data
-"learn.VERSO.phylogeny" <- function( D, alpha = 10^-3, beta = 10^-3, initialization = NULL, num_rs = 10, num_iter = 10000, n_try_bs = 1000, seed = NULL, verbose = TRUE ) {
+"learn.VERSO.phylogenetic.tree" <- function( D, alpha = 10^-3, beta = 10^-3, initialization = NULL, num_rs = 10, num_iter = 10000, n_try_bs = 1000, seed = NULL, verbose = TRUE ) {
     
     # set the seed
     set.seed(seed)
@@ -103,9 +103,17 @@
         }
         
     }
+
+    # renaming
+    rownames(B_global) <- paste0("G",1:nrow(B_global))
+    colnames(B_global) <- c("Reference",colnames(D)[as.numeric(colnames(B_global)[2:ncol(B_global)])])
+    C_global <- matrix(paste0("G",C_global),ncol=1)
+    rownames(C_global) <- rownames(D)
+    colnames(C_global) <- "Genotype"
+
     
     # return maximum likelihood solution
-    return(list(B=B_global,C=C_global,lik=lik_global))
+    return(list(B=B_global,C=C_global,log_likelihood=lik_global))
     
 }
 
