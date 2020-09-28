@@ -91,6 +91,47 @@
         }
     }
 
+    # set initial tree from where to start MCMC search
+    data <- D
+    data[which(is.na(data))] <- 0
+    marginal_probs <- matrix(colSums(data,na.rm=TRUE)/nrow(data),ncol=1)
+    rownames(marginal_probs) <- colnames(data)
+    colnames(marginal_probs) <- "Frequency"
+    joint_probs <- array(NA,c(ncol(data),ncol(data)))
+    rownames(joint_probs) <- colnames(data)
+    colnames(joint_probs) <- colnames(data)
+    for (i in 1:ncol(data)) {
+        for (j in 1:ncol(data)) {
+            val1 <- data[,i]
+            val2 <- data[,j]
+            joint_probs[i,j] <- (t(val1)%*%val2)
+        }
+    }
+    joint_probs <- joint_probs/nrow(data)
+    adjacency_matrix <- array(0,c(ncol(data),ncol(data)))
+    rownames(adjacency_matrix) <- colnames(data)
+    colnames(adjacency_matrix) <- colnames(data)
+    pmi <- joint_probs
+    for(i in 1:nrow(pmi)) {
+        for(j in 1:ncol(pmi)) {
+            pmi[i,j] <- log(joint_probs[i,j]/(marginal_probs[i,"Frequency"]*marginal_probs[j,"Frequency"]))
+        }
+    }
+    ordering <- names(sort(marginal_probs[,"Frequency"],decreasing=TRUE))
+    adjacency_matrix <- adjacency_matrix[ordering,ordering]
+    adjacency_matrix[1,2] = 1
+    if(nrow(adjacency_matrix)>2) {
+        for(i in 3:nrow(adjacency_matrix)) {
+            curr_c <- rownames(adjacency_matrix)[i]
+            curr_candidate_p <- rownames(adjacency_matrix)[(1:(i-1))]
+            adjacency_matrix[names(which.max(pmi[curr_candidate_p,curr_c]))[1],curr_c] <- 1
+        }
+    }
+    adjacency_matrix <- rbind(rep(0,nrow(adjacency_matrix)),adjacency_matrix)
+    adjacency_matrix <- cbind(rep(0,nrow(adjacency_matrix)),adjacency_matrix)
+    adjacency_matrix[1,2] = 1
+    initialization <- as.B(adj_matrix=adjacency_matrix,D=D)
+
     # now start the inference
     if(is.null(parallel)) {
 
