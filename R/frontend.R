@@ -49,6 +49,7 @@
     # remove any indistinguishable variant from input data prior inference
     if(check_indistinguishable) {
         D <- check.indistinguishable(D)
+        storage.mode(D) <- "integer"
     }
 
     # initialize error rates alpha and beta if not provided as inputs

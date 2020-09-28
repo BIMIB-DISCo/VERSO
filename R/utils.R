@@ -20,6 +20,7 @@
         }
         # remove indistinguishable events from data
         data <- data[,valid_colnames,drop=FALSE]
+        colnames(data) <- new_colnames
     }
     
     # return data
