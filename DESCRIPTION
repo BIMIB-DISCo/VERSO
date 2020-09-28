@@ -1,0 +1,36 @@
+Package: VERSO
+Version: 0.99.0
+Date: 2020-09-28
+Title: Viral Evolution ReconStructiOn (VERSO)
+Authors@R: c(person("Daniele","Ramazzotti",role=c("aut"),email="daniele.ramazzotti@unimib.it"),
+    person("Fabrizio","Angaroni",role=c("aut"),email="fabrizio.angaroni@unimib.it"),
+    person("Davide","Maspero",role=c("cre","aut"),email="d.maspero@campus.unimib.it"),
+    person("Alex","Graudenzi",role=c("aut"),email="alex.graudenzi@unimib.it"),
+    person("Luca","De Sano",role=c("ctb"),email="luca.desano@gmail.com"))
+Depends:
+    R (>= 4.0.0)
+Imports:
+    ape,
+    parallel,
+    Rfast,
+    stats,
+    utils
+Suggests:
+    BiocGenerics,
+    BiocStyle,
+    testthat,
+    knitr
+Name:
+    VERSO: an R package for the inference of viral evolution models
+Description:
+    STUB. 
+Encoding: UTF-8
+LazyData: TRUE
+License: file LICENSE
+URL: https://github.com/BIMIB-DISCo/VERSO
+BugReports: https://github.com/BIMIB-DISCo/VERSO
+biocViews: 
+    BiomedicalInformatics,
+    SomaticMutation
+RoxygenNote: 7.1.1
+VignetteBuilder: knitr

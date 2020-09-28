@@ -36,7 +36,6 @@
 #' @export VERSO
 #' @import ape
 #' @import parallel
-#' @importFrom phangorn keep.tip
 #' @importFrom Rfast rowMaxs
 #' @importFrom stats runif dist
 #'
