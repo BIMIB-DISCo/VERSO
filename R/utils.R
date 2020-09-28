@@ -1,5 +1,5 @@
 # remove any indistinguishable variant from input data
-check.indistinguishable <- function( data ) {
+"check.indistinguishable" <- function( data ) {
     
     # check for indistinguishable events
     indistinguishable <- as.numeric(which(duplicated(t(data))))
