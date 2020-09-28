@@ -1,1 +1,2 @@
-# VERSO
+Viral Evolution ReconStructiOn (VERSO)
+================
