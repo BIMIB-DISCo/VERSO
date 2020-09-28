@@ -34,9 +34,11 @@
 #' summary of association of mutations to genotypes; finally log_likelihood and error_rates return the likelihood of the inferred phylogenetic moldel and 
 #' best values of alpha and beta as estimated by VERSO.
 #' @export VERSO
+#' @import ape
 #' @import parallel
+#' @importFrom phangorn keep.tip
 #' @importFrom Rfast rowMaxs
-#' @importFrom stats runif
+#' @importFrom stats runif dist
 #'
 "VERSO" <- function( D, alpha = NULL, beta = NULL, check_indistinguishable = TRUE, num_rs = 10, num_iter = 10000, n_try_bs = 1000, num_processes = Inf, seed = NULL, verbose = TRUE ) {
     
@@ -188,8 +190,11 @@
         i = i + 1
     }
 
+    # finally build VERSO phylogenetic tree
+    phylogenetic_tree <- get.phylo(adjacency_matrix=as.adj.matrix(B),valid_genotypes=B,samples_attachments=C)
+
     # return results of the inference
-    results <- list(B=B,C=C,phylogenetic_tree=NULL,corrected_genotypes=corrected_genotypes,genotypes_prevalence=genotypes_prevalence,genotypes_summary=genotypes_summary,log_likelihood=log_likelihood,error_rates=error_rates)
+    results <- list(B=B,C=C,phylogenetic_tree=phylogenetic_tree,corrected_genotypes=corrected_genotypes,genotypes_prevalence=genotypes_prevalence,genotypes_summary=genotypes_summary,log_likelihood=log_likelihood,error_rates=error_rates)
     return(results)
 
 }
