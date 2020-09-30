@@ -3,7 +3,7 @@
 \docType{data}
 \name{inference}
 \alias{inference}
-\title{results obtained running VERSO on the provided input dataset.}
+\title{Results obtained running VERSO on the provided input dataset.}
 \format{
 results obtained running VERSO on the provided input dataset
 }
@@ -14,5 +14,5 @@ data(inference)
 results obtained running VERSO on the provided input dataset
 }
 \description{
-results obtained running VERSO on the provided input dataset.
+Results obtained running VERSO on the provided input dataset.
 }
