@@ -13,8 +13,7 @@ Imports:
     ape,
     parallel,
     Rfast,
-    stats,
-    utils
+    stats
 Suggests:
     BiocGenerics,
     BiocStyle,
