@@ -1,6 +1,6 @@
 Package: VERSO
-Version: 0.99.1
-Date: 2020-09-28
+Version: 0.99.2
+Date: 2020-09-30
 Title: Viral Evolution ReconStructiOn (VERSO)
 Authors@R: c(person("Daniele","Ramazzotti",role=c("aut"),email="daniele.ramazzotti@unimib.it"),
     person("Fabrizio","Angaroni",role=c("aut"),email="fabrizio.angaroni@unimib.it"),
