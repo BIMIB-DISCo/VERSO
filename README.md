@@ -13,7 +13,7 @@ In this repository we provide an implementation of *VERSO*.
 # VERSO STEP #1: robust phylogenomic inference from clonal variant profiles
 VERSO STEP #1 employs a probabilistic maximum-likelihood framework for the reconstruction of robust phylogenetic trees from binarized mutational profiles of clonal variants. 
 
-VERSO STEP #1 takes as input:  a n(samples)× m (variants) binary mutational profile matrix, as defined on clonal SNVs only.  In this case, an entry in a given sample is equal to 1(present) if the VF is larger than a certain threshold (in our analyses, equal to 90%), it is equal to 0 if lower than a distinct threshold (in our analyses, equal to 5%), and is considered as missing (NA) in the other cases.
+VERSO STEP #1 takes as input:  a n (samples) × m (variants) binary mutational profile matrix, as defined on clonal SNVs only.  In this case, an entry in a given sample is equal to 1(present) if the VF is larger than a certain threshold (in our analyses, equal to 90%), it is equal to 0 if lower than a distinct threshold (in our analyses, equal to 5%), and is considered as missing (NA) in the other cases.
 
 VERSO outputs:(i) a phylogenetic model where each leaf correspond to a sample, whereas internal nodes correspond to accumulating clonal variants (in Newick format), (ii) the corrected clonal genotype of each sample.
 
