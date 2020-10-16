@@ -139,6 +139,8 @@ jobs:
         run: |
           sudo apt-get install libcurl4-openssl-dev
           sudo apt-get install libgsl-dev
+          sudo apt-get install libharfbuzz-dev
+          sudo apt-get install libfribidi-dev
 
       - uses: r-lib/actions/setup-tinytex@master
 
@@ -312,8 +314,6 @@ jobs:
       - name: Install pkgdown
         if: github.ref == 'refs/heads/master' && env.run_pkgdown == 'true'
         run: |
-          sudo apt-get install libharfbuzz-dev
-          sudo apt-get install libfribidi-dev
           remotes::install_github("r-lib/pkgdown")
         shell: Rscript {0}
 
