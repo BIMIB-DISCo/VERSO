@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">VERSO</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.5</span>
       </span>
     </div>
 
@@ -101,13 +101,10 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span></pre></div>
 <pre><code>## [1] 0.01 0.05</code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co">## [1] 0.01 0.05</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span></pre></div>
 <pre><code>## [1] 0.01 0.05</code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="co">## [1] 0.01 0.05</span></pre></div>
 <p>We can now perform the inference as follow.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="va">inference</span> <span class="op">=</span> <span class="fu"><a href="../reference/VERSO.html">VERSO</a></span><span class="op">(</span>D <span class="op">=</span> <span class="va">variants</span>, 
                   alpha <span class="op">=</span> <span class="va">alpha</span>, 
                   beta <span class="op">=</span> <span class="va">beta</span>, 
@@ -119,25 +116,17 @@
                   seed <span class="op">=</span> <span class="fl">12345</span>, 
                   verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
 <p>We notice that the inference resulting on the command above should be considered only as an example; the parameters num rs, num iter and n try bs representing the number of steps perfomed during the inference are downscaled to reduce execution time. We refer to the Manual for discussion on default values. We provide within the package results of the inference performed with the same parameters as RData.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">inference</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">inference</span><span class="op">)</span><span class="op">)</span></pre></div>
 <pre><code>## [1] "B"                    "C"                    "phylogenetic_tree"   
 ## [4] "corrected_genotypes"  "genotypes_prevalence" "genotypes_summary"   
 ## [7] "log_likelihood"       "error_rates"</code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="co">## [1] "B"                   "C"                    "phylogenetic_tree" </span>
-<span class="co">## [4] "corrected_genotypes" "genotypes_prevalence" "genotypes_summary" </span>
-<span class="co">## [7] "log_likelihood"      "error_rates"</span></pre></div>
 <p>VERSO returns a list of 8 elements as results. Namely, B, C, phylogenetic tree, corrected genotypes, genotypes prevalence, genotypes summary, log likelihood and error rates. Here, B returns the maximum likelihood variants tree (inner nodes of the phylogenetic tree), C the attachment of patients to genotypes and phylogenetic tree VERSO phylogenetic tree, including both variants tree and patients attachments to variants; corrected genotypes is the corrected genotypes, which corrects D given VERSO phylogenetic tree, genotypes prevalence the number of patients and observed prevalence of each genotype and genotypes summary provide a summary of association of mutations to genotypes; finally log likelihood and error rates return the likelihood of the inferred phylogenetic moldel and best values of alpha and beta as estimated by VERSO.</p>
 <p>We can plot the inferred phylogetic tree using the function plot from the package ape.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
+<div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">inference</span><span class="op">$</span><span class="va">phylogenetic_tree</span><span class="op">)</span></pre></div>
-<div class="figure">
-<img src="2_running_VERSO_files/figure-html/unnamed-chunk-5-1.png" alt="Inferred phylogenetic tree" width="1152"><p class="caption">
-Inferred phylogenetic tree
-</p>
-</div>
+<p><img src="2_running_VERSO_files/figure-html/unnamed-chunk-5-1.png" width="1152"></p>
 </div>
   </div>
 
