@@ -8,6 +8,8 @@ In this repository we provide an implementation of *VERSO*.
 
 *VERSO* is an algorithmic framework that processes variants profiles from viral samples to produce phylogenetic models of viral evolution. VERSO includes two separate and subsequent steps, which are perfomed via the scripts provided in this repository. 
 
+![Imgur Graphical Abstract](https://github.com/BIMIB-DISCo/VERSO/blob/VERSO/graphical_abstract.png) 
+
 # VERSO STEP #1: robust phylogenomic inference from clonal variant profiles
 VERSO STEP #1 employs a probabilistic maximum-likelihood framework for the reconstruction of robust phylogenetic trees from binarized mutational profiles of clonal variants. 
 
@@ -24,6 +26,5 @@ VERSO STEP #2 takes as input a n (samples) × m (variants) variant frequency (VF
 
 As output, VERSO STEP #2 delivers both the partitioning of samples in homogeneous clusters and the visualizationin a low-dimensional space, also allowing to label samples according to other covariates, such as, e.g., collection date or geographical location. To facilitate the usage,VERSO STEP #2 is provided as a Python script which employs the SCANPY suite of tools.
 
-![Imgur Graphical Abstract](https://github.com/BIMIB-DISCo/VERSO/blob/VERSO/graphical_abstract.png) 
 
 Please feel free to contact us if you have problems running our tool at daniele.ramazzotti1@gmail.com or d.maspero@campus.unimib.it. 
