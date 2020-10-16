@@ -6,10 +6,8 @@ Viral Evolution ReconStructiOn (VERSO)
 
 In this repository we provide an implementation of *VERSO*. 
 
-![Imgur Graphical Abstract](https://github.com/BIMIB-DISCo/VERSO/blob/VERSO/graphical_abstract.png)
+*VERSO* is an algorithmic framework that processes variants profiles from viral samples to produce phylogenetic models of viral evolution. The approach solves a Boolean Matrix Factorization problem with phylogenetic constraints, by maximizing a log-likelihood function. 
 
-*VERSO* is an algorithmic framework that processes variants profiles from viral samples to produce phylogenetic 
-models of viral evolution. The approach solves a Boolean Matrix Factorization problem with phylogenetic constraints, 
-by maximizing a log-likelihood function. 
+![Imgur Graphical Abstract](https://github.com/BIMIB-DISCo/VERSO/blob/VERSO/graphical_abstract.png) 
 
 Please feel free to contact us if you have problems running our tool at daniele.ramazzotti1@gmail.com or d.maspero@campus.unimib.it. 
