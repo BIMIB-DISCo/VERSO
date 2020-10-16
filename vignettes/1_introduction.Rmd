@@ -22,11 +22,15 @@ The R version of *VERSO* can be installed from Github. To do so, we need to inst
 
 
 ```{r eval=FALSE}
+# install VERSO dependencies
 if (!require("ape")) install.packages("ape")
 if (!require("Rfast")) install.packages("Rfast")
+
+# install VERSO library
 if (!require("devtools")) install.packages("devtools")
 library("devtools")
 install_github("BIMIB-DISCo/VERSO", ref = "master")
+
 # load VERSO library
 library("VERSO")
 ```
