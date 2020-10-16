@@ -20,9 +20,7 @@ We setup the main parameter in oder to perform the inference. The first main par
 alpha = c(0.01,0.05)
 beta = c(0.01,0.05)
 head(alpha)
-## [1] 0.01 0.05
 head(beta)
-## [1] 0.01 0.05
 ```
 
 We can now perform the inference as follow. 
@@ -45,16 +43,12 @@ We notice that the inference resulting on the command above should be considered
 ```{r}
 data(inference)
 print(names(inference))
-
-## [1] "B"                   "C"                    "phylogenetic_tree" 
-## [4] "corrected_genotypes" "genotypes_prevalence" "genotypes_summary" 
-## [7] "log_likelihood"      "error_rates"
 ```
 
 VERSO returns a list of 8 elements as results. Namely, B, C, phylogenetic tree, corrected genotypes, genotypes prevalence, genotypes summary, log likelihood and error rates. Here, B returns the maximum likelihood variants tree (inner nodes of the phylogenetic tree), C the attachment of patients to genotypes and phylogenetic tree VERSO phylogenetic tree, including both variants tree and patients attachments to variants; corrected genotypes is the corrected genotypes, which corrects D given VERSO phylogenetic tree, genotypes prevalence the number of patients and observed prevalence of each genotype and genotypes summary provide a summary of association of mutations to genotypes; finally log likelihood and error rates return the likelihood of the inferred phylogenetic moldel and best values of alpha and beta as estimated by VERSO. 
 
 We can plot the inferred phylogetic tree using the function plot from the package ape. 
 
-```{r fig.width=12, fig.height=8, warning=FALSE, fig.cap="Inferred phylogenetic tree"}
+```{r fig.width=12, fig.height=8, warning=FALSE, fig.cap=""}
 plot(inference$phylogenetic_tree)
 ```

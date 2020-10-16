@@ -238,3 +238,22 @@
     return(results)
 
 }
+
+#' Write a phylogenetic tree as inferred by VERSO to a newick format file.
+#' @title write.newick.tree
+#'
+#' @examples
+#' data(inference)
+#' write.newick.tree(phylogenetic_tree = inference, 
+#'                   file = "inference_tree.new")
+#'
+#' @param phylogenetic_tree Inference results by VERSO.
+#' @param phylogeny_file File where to save the phylogenetic tree in newick format.
+#' @export write.newick.tree
+#' @import ape
+#'
+"write.newick.tree" <- function( phylogenetic_tree, phylogeny_file = "phylogenetic_tree.new" ) {
+
+    write.tree(phylogenetic_tree$phylogenetic_tree,file=phylogeny_file)
+
+}
