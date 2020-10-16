@@ -312,6 +312,8 @@ jobs:
       - name: Install pkgdown
         if: github.ref == 'refs/heads/master' && env.run_pkgdown == 'true'
         run: |
+          sudo apt-get install libharfbuzz-dev
+          sudo apt-get install libfribidi-dev
           remotes::install_github("r-lib/pkgdown")
         shell: Rscript {0}
 
