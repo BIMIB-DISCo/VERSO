@@ -245,7 +245,7 @@
 #' @examples
 #' data(inference)
 #' write.newick.tree(phylogenetic_tree = inference, 
-#'                   file = "inference_tree.new")
+#'                   phylogeny_file = "inference_tree.new")
 #'
 #' @param phylogenetic_tree Inference results by VERSO.
 #' @param phylogeny_file File where to save the phylogenetic tree in newick format.

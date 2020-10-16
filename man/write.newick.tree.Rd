@@ -17,6 +17,6 @@ Write a phylogenetic tree as inferred by VERSO to a newick format file.
 \examples{
 data(inference)
 write.newick.tree(phylogenetic_tree = inference, 
-                  file = "inference_tree.new")
+                  phylogeny_file = "inference_tree.new")
 
 }
