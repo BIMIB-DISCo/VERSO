@@ -24,6 +24,6 @@ In the second step, VERSO takes into account the variant frequency profiles of g
 
 VERSO STEP #2 takes as input a n (samples) × m (variants) variant frequency (VF) profile matrix, in which each entry includes the VF ∈ (0,1) of a given mutation in a certain sample, after filtering out: (i) the clonal variants employed in STEP #1 and (ii) the minor variants possibly involved in homoplasies.
 
-As output, VERSO STEP #2 delivers both the partitioning of samples in homogeneous clusters and the visualizationin a low-dimensional space, also allowing to label samples according to other covariates, such as, e.g., collection date or geographical location. To facilitate the usage, VERSO STEP #2 is provided as a Python script which employs the SCANPY suite of tools.
+As output, VERSO STEP #2 delivers both the partitioning of samples in homogeneous clusters and the visualizationin a low-dimensional space, also allowing to label samples according to other covariates, such as, e.g., collection date or geographical location. To facilitate the usage, VERSO STEP #2 is provided as a Python script which employs the SCANPY suite of tools: https://scanpy.readthedocs.io/en/stable/
 
 Please feel free to contact us if you have problems running our tool at daniele.ramazzotti1@gmail.com or d.maspero@campus.unimib.it. 
