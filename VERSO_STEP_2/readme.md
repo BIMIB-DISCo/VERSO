@@ -17,7 +17,7 @@ Please install the following libraries.
 VERSO STEP #2 requires **4** input files which must be positioned in the folder of the script and detailed as follows.
 
 ## FILE A
-* File name: _"VF_matrix.csv"_
+* **File name: _"VF_matrix.csv"_**
 
 * File type: csv (comma separated value)
 
@@ -41,7 +41,7 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 
 
 ## FILE B
-* File name: _"samples_info_matrix_filename.csv"_
+* **File name: _"samples_info_matrix_filename.csv"_**
 
 * File type: csv (comma separated value)
 
@@ -64,7 +64,7 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 
 
 ## FILE C
-* File name: _"variants_info_matrix_filename.csv"_
+* **File name: _"variants_info_matrix_filename.csv"_**
 
 * File type: csv (comma separated value)
 
@@ -79,7 +79,7 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 	Each remaining entry in position _i,j_ includes the value of a specific attribute _j_ in variant _i_.  
 
 ## FILE D
-* File name: _"configuration_VERSO.txt"_
+* **File name: _"configuration_VERSO.txt"_**
 
 * File type: txt (textual)
 
