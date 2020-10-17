@@ -7,28 +7,25 @@ VERSO STEP #2 is provided as Python script (filename: "VERSO_STEP_2.py") and emp
 # REQUIRIMENTS
 Please install the following libraries.
 
-##(1) [Python 3.6.x] Follow the instructions at: https://www.python.org/downloads/
+* [Python 3.6.x] Follow the instructions at: https://www.python.org/downloads/
 
-##(2) [Scanpy 1.6] https://scanpy.readthedocs.io/en/stable/installation.html
+* [Scanpy 1.6] https://scanpy.readthedocs.io/en/stable/installation.html
 
 
 # INPUTS
   
 VERSO STEP #2 requires *4* input files which must be positioned in the folder of the script and detailed as follows.
 
-##**FILE A)**
-File name: "VF_matrix.csv"
+## FILE A)
+* File name: "VF_matrix.csv"
 
-File type: csv (comma separated value)
+* File type: csv (comma separated value)
 
-Content: a csv file including the variant Frequency (VF) Matrix, with:
-
-	n (variants) + 1 rows  
+* Content: a csv file including the variant Frequency (VF) Matrix, with:
+	* n (variants) + 1 rows  
+	* m (samples) + 1 columns 
 	
-	m (samples) + 1 columns 
-	
-
-The entry in position 1,1 (1st row, 1st column) must be left empty. 
+* The entry in position 1,1 (1st row, 1st column) must be left empty. 
 
 The first row (from position 2 to position m+1) must include sample IDs.
 
@@ -37,7 +34,7 @@ The first column (from position 2 to position n+1) must include variant IDs.
 Each remaining entry in position i,j includes the VF of variant i in sample j. 
 
 
-Warning: VERSO STEP #2 does not process or impute missing values (e.g., NA or NaN).
+**Warning** : VERSO STEP #2 does not process or impute missing values (e.g., NA or NaN).
 
 Therefore, a pre-processing step must be executed by the user to impute possible missing values in the VF_matrix.csv file.
 
