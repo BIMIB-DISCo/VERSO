@@ -16,7 +16,7 @@ Please install the following libraries.
   
 VERSO STEP #2 requires *4* input files which must be positioned in the folder of the script and detailed as follows.
 
-<H1> FILE A) <H1>
+**FILE A)**
 File name: "VF_matrix.csv"
 File type: csv (comma separated value)
 
@@ -57,7 +57,7 @@ Content: Variants info matrix, with n rows (variants) and z columns (attributes)
 **FILE D)**
 File name: configuration_VERSO.txt"
 File type: txt (textual)
-Content: file including the optional parameters of VERSO
+Content: file including the optional parameters of VERSO STEP #2
 
 VERSO STEP #2 takes as input a n (samples) x m (variants) variant frequency (VF) profile matrix, in which each entry includes the VF in {0,1} of a given mutation in a certain sample. 
 VF frequency profiles can be generated via any variant calling pipeline. 
