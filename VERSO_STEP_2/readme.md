@@ -41,7 +41,7 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 
 
 ## FILE B
-* **File name: _"samples_info_matrix_filename.csv"_**
+* **File name: _"samples_info_matrix.csv"_**
 
 * File type: csv (comma separated value)
 
@@ -64,7 +64,7 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 
 
 ## FILE C
-* **File name: _"variants_info_matrix_filename.csv"_**
+* **File name: _"variants_info_matrix.csv"_**
 
 * File type: csv (comma separated value)
 
