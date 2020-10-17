@@ -16,7 +16,7 @@ Please install the following libraries.
   
 VERSO STEP #2 requires *4* input files which must be positioned in the folder of the script and detailed as follows.
 
-**FILE A)**
+<H1> FILE A) <H1>
 File name: "VF_matrix.csv"
 File type: csv (comma separated value)
 
