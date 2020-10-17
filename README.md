@@ -6,7 +6,7 @@ Viral Evolution ReconStructiOn (VERSO)
 
 In this repository we provide an implementation of the *VERSO* (Viral Evolution ReconStructiOn) framework. 
 
-*VERSO* is an algorithmic framework that processes variants profiles from viral samples to produce phylogenetic models of viral evolution. VERSO includes two separate and subsequent steps, which are perfomed via the scripts provided in this repository. 
+*VERSO* is an algorithmic framework that processes variants profiles from viral samples, to produce phylogenetic models of viral evolution from clonal variants and to subsequently quantify the intra-host genomic diversity of samples. VERSO includes two separate and subsequent steps, which are perfomed via the scripts provided in this repository. 
 
 The manuscript of the method is available as a preprint at: https://www.biorxiv.org/content/10.1101/2020.04.22.044404v2
 
