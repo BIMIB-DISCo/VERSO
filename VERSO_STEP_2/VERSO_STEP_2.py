@@ -58,13 +58,13 @@ def colormap(fig,nax):
 #    file format -> comma separated value (csv) file: variants_info_matrix_filename = "zzz.csv"
 
 #(A)
-input_data_matrix_filename = "VF_matrix_Amplicon_dataset.csv"
+input_data_matrix_filename = "VF_matrix.csv"
 
 #(B)
-samples_info_matrix_filename = "samples_info_Amplicon_dataset.txt"
+samples_info_matrix_filename = "samples_info_matrix.txt"
 
 #(C)
-variants_info_matrix_filename = "variants_info_Amplicon_dataset.txt"
+variants_info_matrix_filename = "variants_info_matrix.txt"
 
 
 
