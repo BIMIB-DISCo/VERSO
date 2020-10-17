@@ -87,7 +87,7 @@ adata_all.obs['Contact_group'] = 'NA'
 adata_all.obs['Week'] = 'NA'
 
 
-adata_all.obs['Genotype'][:] = assignments['Cluster']
+adata_all.obs['Genotype'][:] = assignments['Genotype']
 adata_all.obs['Outlier'][:] = assignments['outlier']
 adata_all.obs['Contact_group'][:] = assignments['Epi']
 adata_all.obs['Week'][:] = assignments['week']

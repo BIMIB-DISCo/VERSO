@@ -1,4 +1,4 @@
-	Cluster	Epi	IntEpi	outlier	week
+	Genotype	Epi	IntEpi	outlier	week
 SRR11397714	C19	NA	0	0	11
 SRR11397715	C10	NA	0	0	NA
 SRR11397716	C10	NA	0	0	NA

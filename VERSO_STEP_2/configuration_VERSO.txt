@@ -1,0 +1,9 @@
+Parameter	Value
+knn	10
+n_pca	10
+distance_metric	braycurtis
+leiden_res	1
+a_UMAP	0.01
+b_UMAP	1
+spread_UMAP	1
+min_dist_UMAP	2
