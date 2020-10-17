@@ -92,7 +92,7 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 * From the second row on, please include the value of the following parameters: 
 	* [knn]: number of k nearest neighbours (default = 10)
 	* [n_pca]: number of principal components (default = 10)
-	* [distance_metrics]: metrics to be employed (see SCANPY documentation) (default = 'braycurtis')
+	* [distance_metric]: metrics to be employed (see SCANPY documentation) (default = 'braycurtis')
 	* [leiden_res]: resolution of the Leiden clustering algorighm (default = 1)
 	* [a_UMAP]: parameter a of the UMAP plot (default = 0.01)
 	* [b_UMAP]: parameter b of the UMAP plot (default = 1)
