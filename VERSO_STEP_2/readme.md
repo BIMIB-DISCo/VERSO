@@ -11,7 +11,6 @@ Please install the following libraries.
 
 * [Scanpy 1.6] Follow the instructions at: https://scanpy.readthedocs.io/en/stable/installation.html
 
-
 # INPUTS
   
 VERSO STEP #2 requires **4** input files which must be positioned in the folder of the script and detailed as follows.
@@ -38,8 +37,6 @@ VERSO STEP #2 requires **4** input files which must be positioned in the folder 
 
 Therefore, a pre-processing step must be executed by the user to impute possible missing values in the _"VF_matrix.csv file"_.
 
-
-
 ## FILE B
 * **File name: _"samples_info_matrix.csv"_**
 
@@ -59,9 +56,7 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 
 	Each remaining entry in position _i,j_ includes the value of a specific attribute _j_ in sample _i_.  
 
-
 **Warning** : an attribute named "Genotype" (i.e., the number of the clonal genotype of each sample returned by VERSO STEP #1) must necessarily included to perform STEP #2.
-
 
 ## FILE C
 * **File name: _"variants_info_matrix.csv"_**
@@ -98,9 +93,6 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 	* [b_UMAP]: parameter b of the UMAP plot (default = 1)
 	* [spread_UMAP]: parameter spread of the UMAP plot (default = 1)
 	* [min_dist_UMAP]: parameter min_dist of the UMAP plot (default = 2)
-	
-
-
 
 # RUNNING
 Launch the Python script from the terminal, with the following command: 
@@ -117,4 +109,3 @@ VERSO STEP #2 returns as output:
 
 # EXAMPLE FILES
 As an example, the GitHub folder contains all the files to reproduce the case study on Dataset #1 of the original publication: https://www.biorxiv.org/content/10.1101/2020.04.22.044404v2
-
