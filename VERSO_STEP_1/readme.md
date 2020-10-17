@@ -6,9 +6,11 @@ VERSO STEP #1 is provided as a set of R scripts (directory R) and a demo che be 
 # REQUIREMENTS
 Please install the following R libraries.
 
-* [ape, see https://cran.r-project.org/web/packages/ape/index.html] Command: if (!require("ape")) install.packages("ape") 
+* [ape, see https://cran.r-project.org/web/packages/ape/index.html] Command:
+<pre><code>if (!require("ape")) install.packages("ape")</code></pre>
 
-* [Rfast, see https://cran.r-project.org/web/packages/Rfast/index.html] Command: if (!require("ape")) install.packages("Rfast") 
+* [Rfast, see https://cran.r-project.org/web/packages/Rfast/index.html] Command:
+<pre><code>if (!require("Rfast")) install.packages("Rfast")</code></pre>
 
 # INPUTS
   
