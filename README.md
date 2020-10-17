@@ -27,3 +27,7 @@ VERSO STEP #2 takes as input a n (samples) × m (variants) variant frequency (VF
 As output, VERSO STEP #2 delivers both the partitioning of samples in homogeneous clusters and the visualizationin a low-dimensional space, also allowing to label samples according to other covariates, such as, e.g., collection date or geographical location. To facilitate the usage, VERSO STEP #2 is provided as a Python script which employs the SCANPY suite of tools: https://scanpy.readthedocs.io/en/stable/
 
 Please feel free to contact us if you have problems running our tool at daniele.ramazzotti1@gmail.com or d.maspero@campus.unimib.it. 
+
+# RUNNING
+To run the tools for VERSO STEP #1 and STEP #2, please open the folders named _*VERSO_STEP_1*_ and _*VERSO_STEP_2_* and refer to the related readme, which includes instructions and guidelines. 
+
