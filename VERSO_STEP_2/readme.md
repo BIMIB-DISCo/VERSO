@@ -27,11 +27,11 @@ VERSO STEP #2 requires *4* input files which must be positioned in the folder of
 	
 * The entry in position 1,1 (1st row, 1st column) must be left empty. 
 
-The first row (from position 2 to position m+1) must include sample IDs.
+	<\t> The first row (from position 2 to position m+1) must include sample IDs.
 
-The first column (from position 2 to position n+1) must include variant IDs.
+	The first column (from position 2 to position n+1) must include variant IDs.
 
-Each remaining entry in position i,j includes the VF of variant i in sample j. 
+	Each remaining entry in position i,j includes the VF of variant i in sample j. 
 
 
 **Warning** : VERSO STEP #2 does not process or impute missing values (e.g., NA or NaN).
