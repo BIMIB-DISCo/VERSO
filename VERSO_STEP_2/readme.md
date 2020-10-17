@@ -111,8 +111,9 @@ Launch the Python script from the terminal, with the following command:
 VERSO STEP #2 returns as output:
 
 * 1) the SVG images including the UMAP plots related to the distinct clonal genotypes included in the datasets. The file names are numbered according to the clonal genotype ID: _C01.svg_, _C02.svg_, etc. 
+* 2) the distance among samples, numbered according to the clonal genotype ID: _distances_C01.txt_, _distances_C02.txt_, etc. 
 
-* 2) the metadata for each clonal genotype in folders names as: OUTPUT_C01, OUTPUT_C02, etc. 
+* 3) the metadata for each clonal genotype in folders names as: OUTPUT_C01, OUTPUT_C02, etc. 
 
 # EXAMPLE FILES
 As an example, the GitHub folder contains all the files to reproduce the case study on Dataset #1 of the original publication: https://www.biorxiv.org/content/10.1101/2020.04.22.044404v2
