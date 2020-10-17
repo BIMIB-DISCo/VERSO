@@ -14,10 +14,10 @@ Please install the following libraries.
 
 # INPUTS
   
-VERSO STEP #2 requires *4* input files which must be positioned in the folder of the script and detailed as follows.
+VERSO STEP #2 requires **4** input files which must be positioned in the folder of the script and detailed as follows.
 
 ## FILE A)
-* File name: "VF_matrix.csv"
+* File name: _"VF_matrix.csv"_
 
 * File type: csv (comma separated value)
 
@@ -27,7 +27,7 @@ VERSO STEP #2 requires *4* input files which must be positioned in the folder of
 	
 * The entry in position 1,1 (1st row, 1st column) must be left empty. 
 
-	<\t> The first row (from position 2 to position m+1) must include sample IDs.
+	The first row (from position 2 to position m+1) must include sample IDs.
 
 	The first column (from position 2 to position n+1) must include variant IDs.
 
@@ -41,44 +41,43 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 ####################
 
 ##**FILE B)**
-File name: "samples_info_matrix_filename.csv"
+* File name: _"samples_info_matrix_filename.csv"_
 
-File type: csv (comma separated value)
+* File type: csv (comma separated value)
 
-Content: a csv file including the key information about samples, with: 
+* Content: a csv file including the key information about samples, with: 
 
-	m (samples) rows 
+	* m (samples) rows 
 	
-	k (attributes) columns
+	* k (attributes) columns
 
-The entry in position 1,1 (1st row, 1st column) must be left empty. 
+* The entry in position 1,1 (1st row, 1st column) must be left empty. 
 
-The first column (from position 2 to position m+1) must include sample IDs.
+	The first column (from position 2 to position m+1) must include sample IDs.
 
-The first row (from position 2 to position k+1) must include the attribute name.
+	The first row (from position 2 to position k+1) must include the attribute name.
 
-Each remaining entry in position i,j includes the value of a specific attribute j in sample i.  
+	Each remaining entry in position i,j includes the value of a specific attribute j in sample i.  
 
 
-Warning: an attribute named "Genotype" (i.e., the number of the clonal genotype of each sample returned by VERSO STEP #1) must necessarily included to perform STEP #2.
+**Warning** : an attribute named "Genotype" (i.e., the number of the clonal genotype of each sample returned by VERSO STEP #1) must necessarily included to perform STEP #2.
 
 ####################
 
 ##**FILE C)**
-File name: "variants_info_matrix_filename.csv"
+* File name: _"variants_info_matrix_filename.csv"_
 
-File type: csv (comma separated value)
+* File type: csv (comma separated value)
 
-Content: Variants info matrix, with n rows (variants) and z columns (attributes), each entry includes the value of a 
-    specific attribute for any variant to be considered in the analysis. 
+* Content: Variants info matrix, with n rows (variants) and z columns (attributes), each entry includes the value of a specific attribute for any variant to be considered in the analysis. 
         
 
 ##**FILE D)**
-File name: configuration_VERSO.txt"
+* File name: _"configuration_VERSO.txt"_
 
-File type: txt (textual)
+* File type: txt (textual)
 
-Content: file including the optional parameters of VERSO STEP #2
+* Content: file including the optional parameters of VERSO STEP #2
 
 
 # RUNNING
@@ -87,6 +86,6 @@ Launch the Python script from the terminal, with the following command: python V
 # OUTPUTS
 VERSO STEP #2 returns as output:
 
-##1) the SVG images including the UMAP plots related to the distinct clonal genotypes included in the datasets. The file names are numbered according to the clonal genotype ID: C01.svg, C02.svg, etc. 
+* 1) the SVG images including the UMAP plots related to the distinct clonal genotypes included in the datasets. The file names are numbered according to the clonal genotype ID: C01.svg, C02.svg, etc. 
 
-##2) the metadata for each clonal genotype in folders names as: OUTPUT_C01, OUTPUT_C02, etc. 
+* 2) the metadata for each clonal genotype in folders names as: OUTPUT_C01, OUTPUT_C02, etc. 
