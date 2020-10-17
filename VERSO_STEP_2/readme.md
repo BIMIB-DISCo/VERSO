@@ -80,7 +80,9 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 
 
 # RUNNING
-Launch the Python script from the terminal, with the following command: python VERSO_STEP_2.py
+Launch the Python script from the terminal, with the following command: 
+
+	python VERSO_STEP_2.py
 
 # OUTPUTS
 VERSO STEP #2 returns as output:
