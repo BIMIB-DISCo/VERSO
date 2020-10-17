@@ -55,7 +55,7 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 
 	The first column (from position 2 to position _m_+1) must include sample IDs.
 
-	The first row (from position 2 to position _k_+1) must include the attribute name.
+	The first row (from position 2 to position _k_+1) must include the attribute labels.
 
 	Each remaining entry in position _i,j_ includes the value of a specific attribute _j_ in sample _i_.  
 
@@ -74,7 +74,7 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 
  	The first column (from position 2 to position _n_+1) must include variant IDs.
 
-	The first row (from position 2 to position _z_+1) must include the attribute name.
+	The first row (from position 2 to position _z_+1) must include the attribute labels.
 
 	Each remaining entry in position _i,j_ includes the value of a specific attribute _j_ in variant _i_.  
 
