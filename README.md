@@ -17,7 +17,7 @@ VERSO STEP #1 takes as input:  a n (samples) × m (variants) binary mutational p
 
 VERSO outputs: (i) a phylogenetic model where each leaf correspond to a sample, whereas internal nodes correspond to accumulating clonal variants (in Newick format), (ii) the corrected clonal genotype of each sample.
 
-VERSO is provided as an R open source tool xxx
+VERSO is provided as an R open source tool. 
 
 # VERSO STEP #2: characterization of intra-host genomic diversity
 In the second step, VERSO takes into account the variant frequency profiles of groups of samples with the same clonal genotype (identified via VERSO STEP #1), in order to characterize their intra-host genomic diversity and visualize it on a low-dimensional space. 
@@ -26,8 +26,7 @@ VERSO STEP #2 takes as input a n (samples) × m (variants) variant frequency (VF
 
 As output, VERSO STEP #2 delivers both the partitioning of samples in homogeneous clusters and the visualizationin a low-dimensional space, also allowing to label samples according to other covariates, such as, e.g., collection date or geographical location. To facilitate the usage, VERSO STEP #2 is provided as a Python script which employs the SCANPY suite of tools: https://scanpy.readthedocs.io/en/stable/
 
-Please feel free to contact us if you have problems running our tool at daniele.ramazzotti1@gmail.com or d.maspero@campus.unimib.it. 
-
 # RUNNING
-To run the tools for VERSO STEP #1 and STEP #2, please open the folders: https://github.com/BIMIB-DISCo/VERSO/tree/VERSO/VERSO_STEP_1 and  https://github.com/BIMIB-DISCo/VERSO/tree/VERSO/VERSO_STEP_2 and refer to the related readme, which includes instructions and guidelines. 
+To run the tools for VERSO STEP #1 and STEP #2, please go to the folders: https://github.com/BIMIB-DISCo/VERSO/tree/VERSO/VERSO_STEP_1 and  https://github.com/BIMIB-DISCo/VERSO/tree/VERSO/VERSO_STEP_2 and refer to the related readme files, which include instructions and guidelines. 
 
+Please feel free to contact us if you have problems running our tool at daniele.ramazzotti1@gmail.com or d.maspero@campus.unimib.it. 
