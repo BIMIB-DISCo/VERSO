@@ -22,7 +22,7 @@ VERSO STEP #1 R demo script can be executed either by R GUI or from terminal, wi
 	Rscript main.R
 
 # OUTPUTS
-VERSO STEP #1 returns as output and R list reporting the inferred maximum log-likelihood phylogenetic tree. 
+VERSO STEP #1 returns as output an R list reporting the inferred maximum log-likelihood phylogenetic tree. 
 
 # EXAMPLE FILES
 As an example, the GitHub folder contains a demo RData named variants.RData which includes variants for a selected set of 15 SARS-CoV-2 samples obtained by variant calling from raw data available from NCBI BioProject PRJNA610428. 
