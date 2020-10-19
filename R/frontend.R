@@ -36,10 +36,10 @@
 #' @export VERSO
 #' @import ape
 #' @import parallel
-#' @importFrom Rfast rowMaxs
+#' @importFrom Rfast rowMaxs rowsums
 #' @importFrom stats runif dist
 #'
-"VERSO" <- function( D, alpha = NULL, beta = NULL, check_indistinguishable = TRUE, num_rs = 10, num_iter = 10000, n_try_bs = 1000, num_processes = Inf, seed = NULL, verbose = TRUE ) {
+VERSO <- function( D, alpha = NULL, beta = NULL, check_indistinguishable = TRUE, num_rs = 10, num_iter = 10000, n_try_bs = 1000, num_processes = Inf, seed = NULL, verbose = TRUE ) {
     
     # set the seed
     set.seed(seed)
@@ -100,8 +100,8 @@
     joint_probs <- array(NA,c(ncol(data),ncol(data)))
     rownames(joint_probs) <- colnames(data)
     colnames(joint_probs) <- colnames(data)
-    for (i in 1:ncol(data)) {
-        for (j in 1:ncol(data)) {
+    for (i in seq_len(ncol(data))) {
+        for (j in seq_len(ncol(data))) {
             val1 <- data[,i]
             val2 <- data[,j]
             joint_probs[i,j] <- (t(val1)%*%val2)
@@ -112,8 +112,8 @@
     rownames(adjacency_matrix) <- colnames(data)
     colnames(adjacency_matrix) <- colnames(data)
     pmi <- joint_probs
-    for(i in 1:nrow(pmi)) {
-        for(j in 1:ncol(pmi)) {
+    for(i in seq_len(nrow(pmi))) {
+        for(j in seq_len(ncol(pmi))) {
             pmi[i,j] <- log(joint_probs[i,j]/(marginal_probs[i,"Frequency"]*marginal_probs[j,"Frequency"]))
         }
     }
@@ -123,7 +123,7 @@
     if(nrow(adjacency_matrix)>2) {
         for(i in 3:nrow(adjacency_matrix)) {
             curr_c <- rownames(adjacency_matrix)[i]
-            curr_candidate_p <- rownames(adjacency_matrix)[(1:(i-1))]
+            curr_candidate_p <- rownames(adjacency_matrix)[seq_len((i-1))]
             adjacency_matrix[names(which.max(pmi[curr_candidate_p,curr_c]))[1],curr_c] <- 1
         }
     }
@@ -137,7 +137,7 @@
 
         # sequential computation
         inference <- list()
-        for(i in 1:length(alpha)) {
+        for(i in seq_len(length(alpha))) {
             
             if(verbose) {
                 message(paste('Performing inference for alpha =',paste0(alpha[i],collapse=" | "),'and beta =',paste0(beta[i],collapse=" | ")))
@@ -163,7 +163,7 @@
         clusterExport(parallel,varlist=c("D","alpha","beta","initialization","num_rs","num_iter","n_try_bs","verbose"),envir=environment())
         clusterExport(parallel,c("learn.VERSO.phylogenetic.tree","initialize.B","move.B","compute.C"),envir=environment())
         clusterSetRNGStream(parallel,iseed=round(runif(1)*100000))
-        inference <- parLapply(parallel,1:length(alpha),function(x) {
+        inference <- parLapply(parallel,seq_len(length(alpha)),function(x) {
             
             if(verbose) {
                 message(paste('Performing inference for alpha =',paste0(alpha[x],collapse=" | "),'and beta =',paste0(beta[x],collapse=" | ")))
@@ -190,7 +190,7 @@
 
     # return the solution at maximum log-likelihood among the inferrend ones
     lik <- NULL
-    for(i in 1:length(inference)) {
+    for(i in seq_len(length(inference))) {
         lik <- c(lik,inference[[i]][["log_likelihood"]])
     }
     best <- which(lik==max(lik))[1]
@@ -205,7 +205,7 @@
     C_matrix <- array(0,c(nrow(D),ncol(B)))
     rownames(C_matrix) <- rownames(D)
     colnames(C_matrix) <- colnames(B)
-    for(i in 1:nrow(C_matrix)) {
+    for(i in seq_len(nrow(C_matrix))) {
         C_matrix[i,which(rownames(B)==C[rownames(C_matrix)[i],"Genotype"])] <- 1
     }
     corrected_genotypes <- C_matrix %*% B
@@ -253,7 +253,7 @@
 #' @export write.newick.tree
 #' @import ape
 #'
-"write.newick.tree" <- function( phylogenetic_tree, phylogeny_file = "phylogenetic_tree.new" ) {
+write.newick.tree <- function( phylogenetic_tree, phylogeny_file = "phylogenetic_tree.new" ) {
 
     write.tree(phylogenetic_tree$phylogenetic_tree,file=phylogeny_file)
 
