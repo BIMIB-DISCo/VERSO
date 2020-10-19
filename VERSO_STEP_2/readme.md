@@ -53,6 +53,8 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 	The first column (from position 2 to position _m_+1) must include sample IDs.
 
 	The first row (from position 2 to position _k_+1) must include the attribute labels.
+		The first attribute must be: "Genotype" (clonal genotype of each sample, retrieved from VERSO STEP #1, numbered from 1)
+		The second attribute must be: "Selected" (if the sample is selected this value has to be **1**)
 
 	Each remaining entry in position _i,j_ includes the value of a specific attribute _j_ in sample _i_.  
 
@@ -70,6 +72,7 @@ Therefore, a pre-processing step must be executed by the user to impute possible
  	The first column (from position 2 to position _n_+1) must include variant IDs.
 
 	The first row (from position 2 to position _z_+1) must include the attribute labels.
+		The first attribute must be: "Selected" (if the variant is included in the analysis this value has to be **1**)
 
 	Each remaining entry in position _i,j_ includes the value of a specific attribute _j_ in variant _i_.  
 
@@ -85,14 +88,16 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 	* Value
 
 * From the second row on, please include the value of the following parameters: 
-	* [knn]: number of k nearest neighbours (default = 10)
-	* [n_pca]: number of principal components (default = 10)
-	* [distance_metric]: metrics to be employed (see SCANPY documentation) (default = 'braycurtis')
-	* [leiden_res]: resolution of the Leiden clustering algorighm (default = 1)
-	* [a_UMAP]: parameter a of the UMAP plot (default = 0.01)
-	* [b_UMAP]: parameter b of the UMAP plot (default = 1)
-	* [spread_UMAP]: parameter spread of the UMAP plot (default = 1)
-	* [min_dist_UMAP]: parameter min_dist of the UMAP plot (default = 2)
+	* [sample_filter] yes (use only samples with value 1 in "Selected" attribute) / no (use all samples)
+	* [variant_filter] yes (use only variants with value 1 in "Selected" attribute) / no (use all variants)
+	* [knn]: number of k nearest neighbours
+	* [n_pca]: number of principal components
+	* [distance_metric]: metrics to be employed (see SCANPY documentation)
+	* [leiden_res]: resolution of the Leiden clustering algorighm
+	* [a_UMAP]: parameter a of the UMAP plot
+	* [b_UMAP]: parameter b of the UMAP plot
+	* [spread_UMAP]: parameter spread of the UMAP plot
+	* [min_dist_UMAP]: parameter min_dist of the UMAP plot
 
 # RUNNING
 Launch the Python script from the terminal, with the following command: 
@@ -102,7 +107,10 @@ Launch the Python script from the terminal, with the following command:
 # OUTPUTS
 VERSO STEP #2 returns as output:
 
-* 1) the SVG images including the UMAP plots related to the distinct clonal genotypes included in the datasets. The file names are numbered according to the clonal genotype ID: _C01.svg_, _C02.svg_, etc. 
+* 1) the SVG images including the UMAP plots related to the distinct clonal genotypes included in the datasets. 
+	** A single SVG is produced for each sample attribute (excluded "Genotype" and "Selected"). 
+	
+	The file names are numbered according to the clonal genotype ID: G01_Attribute_2.svg,  G02_Attribute_2.svg, etc. 
 * 2) the distance among samples, numbered according to the clonal genotype ID: _distances_C01.txt_, _distances_C02.txt_, etc. 
 
 * 3) the metadata for each clonal genotype in folders names as: OUTPUT_C01, OUTPUT_C02, etc. 
