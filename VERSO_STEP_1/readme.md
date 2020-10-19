@@ -18,7 +18,7 @@ VERSO STEP #1 requires as input an R matrix reporting binarized variant profiles
 
 This can be generated either by a preprocessed file (see data/variants.txt) or from aligned consensus sequences (see as an example the files in the directory example_alignment_consensus_sequences and specifically the file gisaid_example_aligned.fasta. 
 
-In the first case (preprocessed file), data can be directly imported in R by reading the file. In the second case, raw fasta files first needs to be aligned; this can be done with many tools and here we provide as an example a bash script to do this task using augur from the Nextstrain pipeline (https://github.com/nextstrain/augur). To replicate our analysis, run the bash script run_alignment.sh; configuration of Nextstrain/augur is left to the user. 
+In the first case (preprocessed file), data can be directly imported in R by reading the file. In the second case, raw fasta files first need to be aligned; this can be done with many tools and here we provide as an example a bash script to perform this task using augur from the Nextstrain pipeline (https://github.com/nextstrain/augur). To replicate our analysis, run the bash script run_alignment.sh; configuration of Nextstrain/augur is left to the user. 
 
 We finally provide the R code to import VERSO STEP #1 input data both from preprocessed file and from consensus sequences in the script main_part1_data_import.R. It can be executed either by R GUI or from terminal, with the following command: 
 
