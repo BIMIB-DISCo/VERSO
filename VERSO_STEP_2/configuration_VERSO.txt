@@ -1,4 +1,6 @@
 Parameter	Value
+sample_filter	yes
+variant_filter	yes
 knn	10
 n_pca	10
 distance_metric	braycurtis
