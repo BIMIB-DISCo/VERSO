@@ -32,8 +32,9 @@ VERSO STEP #2 is provided as a Python script which employs the SCANPY suite of t
 
 # RUNNING
 To run the tools for VERSO STEP #1 and STEP #2, please go to the folders: 
-* [VERSO STEP #1] https://github.com/BIMIB-DISCo/VERSO/tree/VERSO/VERSO_STEP_1 
-* [VERSO STEP #2] https://github.com/BIMIB-DISCo/VERSO/tree/VERSO/VERSO_STEP_2 
+* **[VERSO STEP #1]** https://github.com/BIMIB-DISCo/VERSO/tree/VERSO/VERSO_STEP_1 
+* **[VERSO STEP #2]** https://github.com/BIMIB-DISCo/VERSO/tree/VERSO/VERSO_STEP_2 
+
 and refer to the related readme files, which include instructions and guidelines. 
 
 Please feel free to contact us if you have problems running our tool at daniele.ramazzotti1@gmail.com or d.maspero@campus.unimib.it. 
