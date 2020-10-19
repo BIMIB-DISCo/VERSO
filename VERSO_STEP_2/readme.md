@@ -116,4 +116,4 @@ VERSO STEP #2 returns as output:
 * 3) the metadata for each clonal genotype in folders names as: G01_OUPUTS, G02_OUPUTS, etc.txt
 
 # EXAMPLE FILES
-As an example, the GitHub folder contains all the files to reproduce the case study on Dataset #1 of the original publication: https://www.biorxiv.org/content/10.1101/2020.04.22.044404v2
+As an example, the GitHub folder contains sample files from Dataset #1 of the original publication: https://www.biorxiv.org/content/10.1101/2020.04.22.044404v2
