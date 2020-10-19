@@ -92,8 +92,8 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 	* [variant_filter] yes (use only variants with value 1 in "Selected" attribute) / no (use all variants)
 	* [knn]: number of k nearest neighbours
 	* [n_pca]: number of principal components to be used 
-	* [distance_metric]: metric to be employed (e.g., 'braycurtis') (see SCANPY documentation: https://scanpy.readthedocs.io/en/stable/api/scanpy.pp.neighbors.html)
-	* [leiden_res]: resolution of the Leiden clustering algorithm
+	* [distance_metric]: metric to be employed in the knn (e.g., 'braycurtis') (see SCANPY documentation: https://scanpy.readthedocs.io/en/stable/api/scanpy.pp.neighbors.html)
+	* [leiden_res]: resolution of the Leiden clustering algorithm on the knn graph
 	* [a_UMAP]: parameter a of the UMAP plot
 	* [b_UMAP]: parameter b of the UMAP plot
 	* [spread_UMAP]: parameter spread of the UMAP plot
