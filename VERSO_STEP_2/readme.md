@@ -111,9 +111,9 @@ VERSO STEP #2 returns as output:
 	** A single SVG is produced for each sample attribute (excluded "Genotype" and "Selected"). 
 	
 	The file names are numbered according to the clonal genotype ID: G01_Attribute_2.svg,  G02_Attribute_2.svg, etc. 
-* 2) the distance among samples, numbered according to the clonal genotype ID: _distances_C01.txt_, _distances_C02.txt_, etc. 
+* 2) the distance among samples, numbered according to the clonal genotype ID: G01_distances.txt, G01_distances.txt, etc.  
 
-* 3) the metadata for each clonal genotype in folders names as: OUTPUT_C01, OUTPUT_C02, etc. 
+* 3) the metadata for each clonal genotype in folders names as: G01_OUPUTS, G02_OUPUTS, etc.txt
 
 # EXAMPLE FILES
 As an example, the GitHub folder contains all the files to reproduce the case study on Dataset #1 of the original publication: https://www.biorxiv.org/content/10.1101/2020.04.22.044404v2
