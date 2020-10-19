@@ -1,0 +1,81 @@
+inputfile = orig
+4 x 29903 - 29897 d
+nthread = 10
+nadd = 0
+inputfile = infile
+thresholdtorev = 0.000000
+reflim = 5000
+mode = a
+generating a scoring matrix for nucleotide (dist=200) ... done
+
+Step 1/2
+1   
+
+Step 2/2
+ 1 / 4 (10 threads)   
+makedirectionlist (nuc) Version 7.458
+alg=m, model=DNA200 (2), 1.53 (4.59), 0.37 (1.11), noshift, amax=0.0
+10 thread(s)
+
+directionfile = _direction
+inputfile = infile
+subalignment = 0
+subalignmentoffset = 0
+4 x 29903 - 29897 d
+directionfile = _direction
+inputfile = orig
+subalignment = 0
+subalignmentoffset = 0
+4 x 29903 - 29897 d
+nthread = 10
+nthreadpair = 10
+nthreadtb = 10
+ppenalty_ex = 0
+stacksize: 8192 kb
+generating a scoring matrix for nucleotide (dist=200) ... done
+Gap Penalty = -1.53, +0.00, +0.00
+
+
+
+Making a distance matrix ..
+
+There are 1 ambiguous characters.
+    1 / 4 (thread    0)
+done.
+
+Constructing a UPGMA tree (efffree=0) ... 
+    0 / 4
+done.
+
+Progressive alignment 1/2... 
+STEP     1 / 3 (thread    0) fSTEP     2 / 3 (thread    1) fSTEP     3 / 3 (thread    2) f
+done.
+
+Making a distance matrix from msa.. 
+    0 / 4 (thread    1)
+done.
+
+Constructing a UPGMA tree (efffree=1) ... 
+    0 / 4
+done.
+
+Progressive alignment 2/2... 
+STEP     1 / 3 (thread    0) fSTEP     2 / 3 (thread    1) fSTEP     3 / 3 (thread    2) f
+done.
+
+disttbfast (nuc) Version 7.458
+alg=A, model=DNA200 (2), 1.53 (4.59), -0.00 (-0.00), noshift, amax=0.0
+10 thread(s)
+
+
+Strategy:
+ FFT-NS-2 (Fast but rough)
+ Progressive method (guide trees were built 2 times.)
+
+If unsure which option to use, try 'mafft --auto input > output'.
+For more information, see 'mafft --help', 'mafft --man' and the mafft page.
+
+The default gap scoring scheme has been changed in version 7.110 (2013 Oct).
+It tends to insert more gaps into gap-rich regions than previous versions.
+To disable this change, add the --leavegappyregion option.
+

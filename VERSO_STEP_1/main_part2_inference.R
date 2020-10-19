@@ -1,16 +1,16 @@
-# install VERSO dependencies if needed
+# installing VERSO dependencies if needed
 if (!require("ape")) install.packages("ape")
 if (!require("Rfast")) install.packages("Rfast")
 
-# source VERSO R scripts
+# sourcing VERSO R scripts
 source("R/frontend.R")
 source("R/inference.R")
 source("R/utils.R")
 
-# load example (toy) data
+# loading example (toy) data
 load("data/variants.RData")
 
-# set the grid search (alpha and beta)
+# setting the grid search (alpha and beta)
 alpha = c(0.01,0.05)
 beta = c(0.01,0.05)
 
@@ -26,5 +26,5 @@ inference = VERSO(D = variants,
                   seed = 12345,
                   verbose = TRUE)
 
-# plot the inferred phylogenetic tree
+# plotting the inferred phylogenetic tree
 plot(inference$phylogenetic_tree)
