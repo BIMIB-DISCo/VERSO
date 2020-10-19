@@ -19,7 +19,7 @@
     for(i in 1:num_rs) {
         
         if(verbose) {
-            cat(paste0("Performing restart number ",as.character(as.integer(i))," out of ",as.character(as.integer(num_rs))),"\n")
+            message("Performing restart number ",i," out of ",num_rs)
         }
         
         # initialize B
@@ -53,7 +53,7 @@
         for(j in 1:num_iter) {
             
             if(verbose&&(j%%100)==0) {
-                cat(paste0("Performed iteration number ",as.character(as.integer(j))," out of ",as.character(as.integer(num_iter))," | Current best log-likelihood ",lik_best,"\n"))
+                message("Performing iteration number ",j," out of ",num_iter," | Current best log-likelihood ",lik_best)
             }
             
             # perform a move on B
@@ -80,7 +80,7 @@
                 if(count_lik_best_cons>n_try_bs) {
                     # print a message
                     if(verbose) {
-                        cat(paste0("Not improving likelihood of best solution after ",as.character(as.integer(n_try_bs))," iterations. Skipping to next restart.\n"))
+                        message("Not improving likelihood of best solution after ",n_try_bs," iterations. Skipping to next restart")
                     }
                     break;
                 }
