@@ -22,7 +22,7 @@ VERSO outputs: (i) a phylogenetic model where each leaf correspond to a sample, 
 VERSO is provided as an R open source tool. 
 
 ## RUNNING
-To run he **VERSO STEP #1** tool please go to the folder: https://github.com/BIMIB-DISCo/VERSO/tree/VERSO/VERSO_STEP_1 and refer to the related readme, which includes instructions and guidelines. 
+To run the **VERSO STEP #1** tool please go to the folder: https://github.com/BIMIB-DISCo/VERSO/tree/VERSO/VERSO_STEP_1 and refer to the related readme, which includes instructions and guidelines. 
 
 
 # VERSO STEP #2: characterization of intra-host genomic diversity
