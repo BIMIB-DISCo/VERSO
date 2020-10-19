@@ -1,5 +1,5 @@
 Package: VERSO
-Version: 0.99.7
+Version: 0.99.8
 Date: 2020-10-19
 Title: Viral Evolution ReconStructiOn (VERSO)
 Authors@R: c(person("Daniele", "Ramazzotti", role=c("aut"),email="daniele.ramazzotti@yahoo.com",
@@ -23,6 +23,11 @@ Suggests:
 Name:
     VERSO: an R package for the inference of viral evolution models
 Description:
+    Mutations that rapidly accumulate in viral genomes during a pandemic can be used to track the evolution of the virus 
+    and, accordingly, unravel the viral infection network. 
+    To this extent, sequencing samples of the virus can be employed to estimate models from genomic epidemiology and may 
+    serve, for instance, to estimate the proportion of undetected infected people by uncovering cryptic transmissions, as 
+    well as to predict likely trends in the number of infected, hospitalized, dead and recovered people. 
     VERSO is an algorithmic framework that processes variants profiles from viral samples to produce phylogenetic 
     models of viral evolution. The approach solves a Boolean Matrix Factorization problem with phylogenetic constraints, 
     by maximizing a log-likelihood function. 
