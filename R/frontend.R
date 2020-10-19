@@ -36,7 +36,7 @@
 #' @export VERSO
 #' @import ape
 #' @import parallel
-#' @importFrom Rfast rowMaxs
+#' @importFrom Rfast rowMaxs rowsums
 #' @importFrom stats runif dist
 #'
 "VERSO" <- function( D, alpha = NULL, beta = NULL, check_indistinguishable = TRUE, num_rs = 10, num_iter = 10000, n_try_bs = 1000, num_processes = Inf, seed = NULL, verbose = TRUE ) {
