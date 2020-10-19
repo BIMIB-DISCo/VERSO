@@ -2,14 +2,14 @@
 VERSO STEP #2 processes the variant frequency (VF) profiles of groups of samples with the same clonal genotype (identified via VERSO STEP #1), in order to characterize their intra-host genomic composition and visualize it on a low-dimensional space. 
 This step requires VF profiles generated from raw sequencing data via variant calling and the prior execution of STEP #1.
 
-VERSO STEP #2 is provided as Python script (filename: "VERSO_STEP_2.py") and employs standard libraries included in the SCANPY suite. 
+VERSO STEP #2 is provided as Python script (filename: "VERSO_STEP_2.py") and employs standard libraries included in the SCANPY suite.  
 
 # REQUIREMENTS
 Please install the following libraries.
 
 * [Python 3.6.x] Follow the instructions at: https://www.python.org/downloads/
 
-* [Scanpy 1.6] Follow the instructions at: https://scanpy.readthedocs.io/en/stable/installation.html
+* [SCANPY 1.6] Follow the instructions at: https://scanpy.readthedocs.io/en/stable/installation.html
 
 # INPUTS
   
