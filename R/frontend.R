@@ -14,12 +14,16 @@
 #'                   seed = 12345, 
 #'                   verbose = FALSE)
 #'
-#' @param D Input data for the inference reporting presence (as 1), absense (as 0) or missing information (as NA) for a set of variants.
-#' @param alpha False positive error rate provided as a verctor; if a vector of alpha (and beta) is provided, the inference is performed 
+#' @param D Input data for the inference reporting presence (as 1), absense (as 0) or missing 
+#' information (as NA) for a set of variants.
+#' @param alpha False positive error rate provided as a verctor; if a vector of alpha (and beta) 
+#' is provided, the inference is performed 
 #' for multiple values and the solution at maximum-likelihood is returned.
-#' @param beta False negative error rate provided as a verctor; if a vector of beta (and alpha) is provided, the inference is performed 
+#' @param beta False negative error rate provided as a verctor; if a vector of beta (and alpha) 
+#' is provided, the inference is performed 
 #' for multiple values and the solution at maximum-likelihood is returned.
-#' @param check_indistinguishable Boolean. Shall I remove any indistinguishable variant from input data prior inference?
+#' @param check_indistinguishable Boolean. Shall I remove any indistinguishable variant 
+#' from input data prior inference?
 #' @param num_rs Number of restarts during MCMC inference.
 #' @param num_iter Maximum number of MCMC steps to be performed during the inference.
 #' @param n_try_bs Number of steps without changes in likelihood of best solution after which to stop the MCMC.
@@ -27,11 +31,13 @@
 #' this parameter needs to be set to either 1, NA or NULL.
 #' @param seed Seed for reproducibility.
 #' @param verbose Boolean. Shall I print to screen information messages during the execution?
-#' @return A list of 8 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, genotypes_summary, log_likelihood and error_rates. 
-#' Here, B returns the maximum likelihood variants tree (inner nodes of the phylogenetic tree), C the attachment of patients to genotypes and phylogenetic_tree 
-#' VERSO phylogenetic tree, including both variants tree and patients attachments to variants; corrected_genotypes is the corrected genotypes, which corrects 
-#' D given VERSO phylogenetic tree, genotypes_prevalence the number of patients and observed prevalence of each genotype and genotypes_summary provide a 
-#' summary of association of mutations to genotypes; finally log_likelihood and error_rates return the likelihood of the inferred phylogenetic moldel and 
+#' @return A list of 8 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, 
+#' genotypes_summary, log_likelihood and error_rates. Here, B returns the maximum likelihood variants tree 
+#' (inner nodes of the phylogenetic tree), C the attachment of patients to genotypes and phylogenetic_tree VERSO 
+#' phylogenetic tree, including both variants tree and patients attachments to variants; corrected_genotypes is the 
+#' corrected genotypes, which corrects D given VERSO phylogenetic tree, genotypes_prevalence the number of patients 
+#' and observed prevalence of each genotype and genotypes_summary provide a summary of association of mutations 
+#' to genotypes; finally log_likelihood and error_rates return the likelihood of the inferred phylogenetic moldel and 
 #' best values of alpha and beta as estimated by VERSO.
 #' @export VERSO
 #' @import ape

@@ -1,7 +1,9 @@
 #' @name variants
-#' @title Mutation data obtained by variant calling from raw data of a selected set of SARS-CoV-2 samples available from NCBI 
+#' @title Mutation data obtained by variant calling from raw data of a 
+#' selected set of SARS-CoV-2 samples available from NCBI 
 #' BioProject PRJNA610428.
-#' @description The dataset includes variants for a selected set of 15 SARS-CoV-2 samples obtained by variant calling from raw data 
+#' @description The dataset includes variants for a selected set of 15 
+#' SARS-CoV-2 samples obtained by variant calling from raw data 
 #' available from NCBI BioProject PRJNA610428.
 #' @docType data
 #' @usage data(variants)
