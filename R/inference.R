@@ -1,5 +1,5 @@
 # learn VERSO phylogenetic tree from data
-"learn.VERSO.phylogenetic.tree" <- function( D, alpha = 10^-3, beta = 10^-3, initialization = NULL, num_rs = 10, num_iter = 10000, n_try_bs = 1000, seed = NULL, verbose = TRUE ) {
+learn.VERSO.phylogenetic.tree <- function( D, alpha = 10^-3, beta = 10^-3, initialization = NULL, num_rs = 10, num_iter = 10000, n_try_bs = 1000, seed = NULL, verbose = TRUE ) {
     
     # set the seed
     set.seed(seed)
@@ -118,7 +118,7 @@
 }
 
 # randomly initialize B
-"initialize.B" <- function( D ) {
+initialize.B <- function( D ) {
     
     # data structure where to save B
     B <- array(0L,c((ncol(D)+1),(ncol(D)+1)))
@@ -142,7 +142,7 @@
 }
 
 # performing either relabeling or edge changing moves on B
-"move.B" <- function( B ) {
+move.B <- function( B ) {
     
     # sample a random probability of choosing a move
     p <- runif(1)
@@ -202,7 +202,7 @@
 }
 
 # compute attachments matrix C at maximum likelihood given B and D
-"compute.C" <- function( B, D, alpha = 10^-3, beta = 10^-3 ) {
+compute.C <- function( B, D, alpha = 10^-3, beta = 10^-3 ) {
     
     # determine indeces to order D such that it matches B
     idx_srt <- as.integer(colnames(B)[2:ncol(B)])

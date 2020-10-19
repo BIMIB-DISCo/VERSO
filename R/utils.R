@@ -1,5 +1,5 @@
 # remove any indistinguishable variant from input data
-"check.indistinguishable" <- function( data ) {
+check.indistinguishable <- function( data ) {
     
     # check for indistinguishable events
     indistinguishable <- as.numeric(which(duplicated(t(data))))
@@ -29,7 +29,7 @@
 }
 
 # build a phylogenetic tree from a variants tree (adjacency_matrix) and related samples attachments (samples_attachments)
-"get.phylo" <- function( adjacency_matrix, valid_genotypes, samples_attachments ) {
+get.phylo <- function( adjacency_matrix, valid_genotypes, samples_attachments ) {
     
     # compute Manhattan distance among valid genotypes
     distance_genotypes <- as.matrix(dist(valid_genotypes,method="manhattan"))
@@ -87,7 +87,7 @@
 }
 
 # convert B to an adjacency matrix
-"as.adj.matrix" <- function( B ) {
+as.adj.matrix <- function( B ) {
 
     # create the data structure where to save the adjacency matrix obtained from B
     adj_matrix <- array(0L,dim(B))
@@ -109,7 +109,7 @@
 }
 
 # build B from an adjacency matrix where we assume genotypes and mutations to be both ordered
-"as.B" <- function( adj_matrix, D ) {
+as.B <- function( adj_matrix, D ) {
     
     # build data structure to save results
     n_clones <- nrow(adj_matrix)

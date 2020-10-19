@@ -39,7 +39,7 @@
 #' @importFrom Rfast rowMaxs rowsums
 #' @importFrom stats runif dist
 #'
-"VERSO" <- function( D, alpha = NULL, beta = NULL, check_indistinguishable = TRUE, num_rs = 10, num_iter = 10000, n_try_bs = 1000, num_processes = Inf, seed = NULL, verbose = TRUE ) {
+VERSO <- function( D, alpha = NULL, beta = NULL, check_indistinguishable = TRUE, num_rs = 10, num_iter = 10000, n_try_bs = 1000, num_processes = Inf, seed = NULL, verbose = TRUE ) {
     
     # set the seed
     set.seed(seed)
@@ -253,7 +253,7 @@
 #' @export write.newick.tree
 #' @import ape
 #'
-"write.newick.tree" <- function( phylogenetic_tree, phylogeny_file = "phylogenetic_tree.new" ) {
+write.newick.tree <- function( phylogenetic_tree, phylogeny_file = "phylogenetic_tree.new" ) {
 
     write.tree(phylogenetic_tree$phylogenetic_tree,file=phylogeny_file)
 
