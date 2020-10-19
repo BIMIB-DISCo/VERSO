@@ -215,7 +215,7 @@
         curr_C[1,k] <- 1L
         r_D_tilde <- (curr_C%*%B)*2
         sum_cell <- as.matrix(sweep(curr_D,MARGIN=2,r_D_tilde,"+"))
-        lik_matrix[,k] <- (beta^rowSums(sum_cell==2)) * ((1-beta)^rowSums(sum_cell==0)) * ((alpha)^rowSums(sum_cell==1)) * ((1-alpha)^rowSums(sum_cell==3))
+        lik_matrix[,k] <- (beta^Rfast::rowSums(sum_cell==2)) * ((1-beta)^Rfast::rowSums(sum_cell==0)) * ((alpha)^Rfast::rowSums(sum_cell==1)) * ((1-alpha)^Rfast::rowSums(sum_cell==3))
     }
 
     # compute maximum likelihood attachments
