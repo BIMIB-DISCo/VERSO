@@ -16,7 +16,7 @@ learn.VERSO.phylogenetic.tree <- function( D, alpha = 10^-3, beta = 10^-3, initi
     storage.mode(D) <- "integer"
     
     # perform a number of num_rs restarts
-    for(i in 1:num_rs) {
+    for(i in seq_len(num_rs)) {
         
         if(verbose) {
             message("Performing restart number ",i," out of ",num_rs)
@@ -35,7 +35,7 @@ learn.VERSO.phylogenetic.tree <- function( D, alpha = 10^-3, beta = 10^-3, initi
         else {
             # perform random shuffling of nodes/variants ordering
             B <- B_global
-            colnames(B) <- c("r",sample(1:(ncol(B)-1)))
+            colnames(B) <- c("r",sample(seq_len((ncol(B)-1))))
         }
         
         # compute C given B
@@ -50,7 +50,7 @@ learn.VERSO.phylogenetic.tree <- function( D, alpha = 10^-3, beta = 10^-3, initi
         count_lik_best_cons <- 0
         
         # repeat MCMC moves until num_iter number of iterations is performed
-        for(j in 1:num_iter) {
+        for(j in seq_len(num_iter)) {
             
             if(verbose&&(j%%100)==0) {
                 message("Performing iteration number ",j," out of ",num_iter," | Current best log-likelihood ",lik_best)
@@ -105,7 +105,7 @@ learn.VERSO.phylogenetic.tree <- function( D, alpha = 10^-3, beta = 10^-3, initi
     }
 
     # renaming
-    rownames(B_global) <- paste0("G",1:nrow(B_global))
+    rownames(B_global) <- paste0("G",seq_len(nrow(B_global)))
     colnames(B_global) <- c("Reference",colnames(D)[as.numeric(colnames(B_global)[2:ncol(B_global)])])
     C_global <- matrix(paste0("G",C_global),ncol=1)
     rownames(C_global) <- rownames(D)
@@ -122,8 +122,8 @@ initialize.B <- function( D ) {
     
     # data structure where to save B
     B <- array(0L,c((ncol(D)+1),(ncol(D)+1)))
-    rownames(B) <- c("r",1:ncol(D))
-    colnames(B) <- c("r",sample(1:ncol(D)))
+    rownames(B) <- c("r",seq_len(ncol(D)))
+    colnames(B) <- c("r",sample(seq_len(ncol(D))))
     diag(B) <- 1L
     B[,1] <- 1L
     
@@ -164,23 +164,23 @@ move.B <- function( B ) {
         is_not_valid <- TRUE
         while(is_not_valid) {
             ch_1 <- sample(3:nrow(B),1)
-            ch_2 <- sample(1:(ch_1-1),1)
+            ch_2 <- sample(seq_len((ch_1-1)),1)
             # a pair of two nodes are a valid set if the nodes are not already directly connected
-            if(!(all(B[ch_1,1:ch_2]==B[ch_2,1:ch_2])&&sum(B[ch_1,])==(sum(B[ch_2,])+1))) {
+            if(!(all(B[ch_1,seq_len(ch_2)]==B[ch_2,seq_len(ch_2)])&&sum(B[ch_1,])==(sum(B[ch_2,])+1))) {
                 is_not_valid <- FALSE
             }
         }
 
         # performing move on ch_1
-        ch_1_bkp <- B[ch_1,1:ch_1]
-        B[ch_1,1:(ch_1-1)] <- c(1L,rep(0L,(ch_1-2)))
+        ch_1_bkp <- B[ch_1,seq_len(ch_1)]
+        B[ch_1,seq_len((ch_1-1))] <- c(1L,rep(0L,(ch_1-2)))
         B[ch_1,] <- B[ch_1,] + B[ch_2,]
         
         # performing move on children of ch_1
         if(ch_1 != nrow(B)) {
             for(i in (ch_1+1):nrow(B)) {
-                if(all(ch_1_bkp==B[i,1:ch_1])) {
-                    B[i,1:(ch_1-1)] <- c(1L,rep(0L,(ch_1-2)))
+                if(all(ch_1_bkp==B[i,seq_len(ch_1)])) {
+                    B[i,seq_len((ch_1-1))] <- c(1L,rep(0L,(ch_1-2)))
                     B[i,] <- B[i,] + B[ch_2,]
                 }
             }
@@ -192,7 +192,7 @@ move.B <- function( B ) {
     else if(p>=0.95) {
 
         # random relabeling of all clones
-        colnames(B) <- c("r",sample(1:(ncol(B)-1)))
+        colnames(B) <- c("r",sample(seq_len((ncol(B)-1))))
 
     }
     
@@ -210,7 +210,7 @@ compute.C <- function( B, D, alpha = 10^-3, beta = 10^-3 ) {
     # go through each patient and compute likelihood for all possible attachments
     lik_matrix <- array(0L,c(nrow(D),ncol(B)))
     curr_D <- cbind(rep(1,nrow(D[,idx_srt,drop=FALSE])),D[,idx_srt,drop=FALSE])
-    for(k in 1:nrow(B)) {
+    for(k in seq_len(nrow(B))) {
         curr_C = matrix(rep(0L,nrow(B)),nrow=1)
         curr_C[1,k] <- 1L
         r_D_tilde <- (curr_C%*%B)*2

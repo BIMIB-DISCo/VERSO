@@ -40,7 +40,7 @@ get.phylo <- function( adjacency_matrix, valid_genotypes, samples_attachments ) 
     children_list <- rownames(adjacency_matrix)[as.numeric(edges[,"col"])]
     edges <- cbind(parents_list,children_list)
     edges_weights <- NULL
-    for(i in 1:nrow(edges)) {
+    for(i in seq_len(nrow(edges))) {
         curr_p <- rownames(valid_genotypes)[which(colnames(valid_genotypes)==edges[i,1])]
         curr_c <- rownames(valid_genotypes)[which(colnames(valid_genotypes)==edges[i,2])]
         edges_weights <- c(edges_weights,distance_genotypes[curr_p,curr_c])
@@ -49,7 +49,7 @@ get.phylo <- function( adjacency_matrix, valid_genotypes, samples_attachments ) 
     Nnode <- length(nodes_list)
     parents_list_numeric <- parents_list
     children_list_numeric <- children_list
-    for(nlist in 1:Nnode) {
+    for(nlist in seq_len(Nnode)) {
         curr_nl <- which(parents_list==nodes_list[nlist])
         if(length(curr_nl)>0) {
             parents_list_numeric[curr_nl] <- nlist
@@ -67,14 +67,14 @@ get.phylo <- function( adjacency_matrix, valid_genotypes, samples_attachments ) 
     tip.label <- c(names(attachments),"Reference_Genotype")
     overhead <- length(tip.label)
     edges <- edges + overhead
-    for(i in 1:length(attachments)) {
+    for(i in seq_len(length(attachments))) {
         curr_att <- which(nodes_list==colnames(valid_genotypes)[which(rownames(valid_genotypes)==attachments[i])])+overhead
         edges <- rbind(edges,c(curr_att,i))
         edges_weights <- c(edges_weights,0)
     }
     edges <- rbind(edges,c(as.numeric(edges[1,"Parent"]),(i+1)))
     edges_weights <- c(edges_weights,0)
-    rownames(edges) <- 1:nrow(edges)
+    rownames(edges) <- seq_len(nrow(edges))
 
     # build VERSO phylogenetic tree
     phylogenetic_tree <- list(edge=edges,tip.label=tip.label,Nnode=Nnode,edge.length=edges_weights,node.label=nodes_list,root.edge=0)
@@ -95,9 +95,9 @@ as.adj.matrix <- function( B ) {
     colnames(adj_matrix) <- colnames(B)
 
     # set arcs in the adjacency matrix
-    for(i in 1:(nrow(B)-1)) {
+    for(i in seq_len((nrow(B)-1))) {
         for(j in ((i+1):nrow(B))) {
-            if(all(B[i,1:i]==B[j,1:i])&&(sum(B[i,])==(sum(B[j,])-1))) {
+            if(all(B[i,seq_len(i)]==B[j,seq_len(i)])&&(sum(B[i,])==(sum(B[j,])-1))) {
                 adj_matrix[i,j] <- 1
             }
         }
@@ -116,7 +116,7 @@ as.B <- function( adj_matrix, D ) {
     B <- diag(n_clones)
     
     # build B
-    for(k in 1:n_clones) {
+    for(k in seq_len(n_clones)) {
         idx_child <- which(adj_matrix[k,]==1,arr.ind=TRUE)
         if(length(idx_child)==1) {
             B[idx_child,] <- B[k,] + B[idx_child,]
@@ -125,7 +125,7 @@ as.B <- function( adj_matrix, D ) {
             B[idx_child,] <- sweep(B[idx_child,],2,B[k,],"+")
         }
     }
-    rownames(B) <- c("r",1:(nrow(B)-1))
+    rownames(B) <- c("r",seq_len((nrow(B)-1)))
     mycolnames <- "r"
     for(i in 2:nrow(adj_matrix)) {
         mycolnames <- c(mycolnames,as.character(which(rownames(adj_matrix)[i]==colnames(D))))
