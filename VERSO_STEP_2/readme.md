@@ -110,7 +110,7 @@ VERSO STEP #2 returns as output:
 * 1) the SVG images including the UMAP plots related to the distinct clonal genotypes included in the datasets. 
 	** A single SVG is produced for each sample attribute (excluded "Genotype" and "Selected"). 
 	
-	The file names are numbered according to the clonal genotype ID: G01_Attribute_2.svg,  G02_Attribute_2.svg, etc. 
+	The file names are numbered according to the clonal genotype ID: G01_Attribute_1.svg,  G02_Attribute_1.svg, etc. 
 * 2) the distance among samples, numbered according to the clonal genotype ID: G01_distances.txt, G01_distances.txt, etc.  
 
 * 3) the metadata for each clonal genotype in folders names as: G01_OUPUTS, G02_OUPUTS, etc.txt
