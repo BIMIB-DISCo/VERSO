@@ -249,6 +249,7 @@
 #'
 #' @param phylogenetic_tree Inference results by VERSO.
 #' @param phylogeny_file File where to save the phylogenetic tree in newick format.
+#' @return A phylogenetic tree as inferred by VERSO in newick format.
 #' @export write.newick.tree
 #' @import ape
 #'

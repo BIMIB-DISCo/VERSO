@@ -11,6 +11,9 @@ write.newick.tree(phylogenetic_tree, phylogeny_file = "phylogenetic_tree.new")
 
 \item{phylogeny_file}{File where to save the phylogenetic tree in newick format.}
 }
+\value{
+A phylogenetic tree as inferred by VERSO in newick format.
+}
 \description{
 Write a phylogenetic tree as inferred by VERSO to a newick format file.
 }
