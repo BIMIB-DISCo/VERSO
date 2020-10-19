@@ -127,7 +127,7 @@ for x in range(how_many_clusters):
                    spread = input_spread_UMAP, min_dist = input_min_dist_UMAP)
 
         temp_file = temp+'.svg'
-        temp_output = 'output'+temp+'.csv'
+        temp_output = temp+'_OUTPUT.csv'
         temp_file_distances = temp+'_distances.txt'
 
         if how_many_samples > 500:
@@ -139,7 +139,7 @@ for x in range(how_many_clusters):
         for i in range(len(assignments.columns)):
             if assignments.columns[i] != 'Genotype':
             	if assignments.columns[i] != 'Selected':
-		            temp_file = temp+assignments.columns[i]+'.svg'
+		            temp_file = temp+'_'+assignments.columns[i]+'.svg'
 		            temp_title_fin = temp_title + ' ' + assignments.columns[i]
 		            sc.pl.umap(adata_all_cluster, color=([str(assignments.columns[i])]), 
 		                       legend_loc='right margin', edges = 'TRUE', 
@@ -147,7 +147,7 @@ for x in range(how_many_clusters):
 		                       title = temp_title_fin , show=False)
 		            plt.savefig(temp_file,bbox_inches='tight')
         
-        temp_file = temp + 'Leiden_clusters.svg'
+        temp_file = temp + '_Leiden_clusters.svg'
         temp_title_fin = temp_title + ' Leiden_clusters'
         sc.pl.umap(adata_all_cluster, color=('Leiden_clusters'),                    
                    legend_loc='right margin', edges = 'TRUE', 
