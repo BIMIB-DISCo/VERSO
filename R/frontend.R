@@ -60,7 +60,7 @@
     }
     
     if(verbose) {
-        cat(paste0("Performing inference for a total of ",length(alpha)," different values of alpha and beta.","\n"))
+        message("Performing inference for a total of ",length(alpha)," different values of alpha and beta.")
     }
 
     # setting up parallel execution
@@ -87,7 +87,7 @@
             close_parallel <- TRUE
         }
         if(verbose && !is.null(parallel)) {
-            cat("Executing",num_processes,"processes via parallel...","\n")
+            message("Executing ",num_processes," processes in parallel.")
         }
     }
 
@@ -140,7 +140,7 @@
         for(i in 1:length(alpha)) {
             
             if(verbose) {
-                cat('Performing inference for alpha =',paste0(alpha[i],collapse=" | "),'and beta =',paste0(beta[i],collapse=" | "),'\n')
+                message(paste('Performing inference for alpha =',paste0(alpha[i],collapse=" | "),'and beta =',paste0(beta[i],collapse=" | ")))
             }
 
             inference[[i]] <- learn.VERSO.phylogenetic.tree(D = D, 
@@ -166,7 +166,7 @@
         inference <- parLapply(parallel,1:length(alpha),function(x) {
             
             if(verbose) {
-                cat('Performing inference for alpha =',paste0(alpha[x],collapse=" | "),'and beta =',paste0(beta[x],collapse=" | "),'\n')
+                message(paste('Performing inference for alpha =',paste0(alpha[x],collapse=" | "),'and beta =',paste0(beta[x],collapse=" | ")))
             }
             
             inference <- learn.VERSO.phylogenetic.tree(D = D, 
