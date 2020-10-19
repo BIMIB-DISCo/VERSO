@@ -38,11 +38,11 @@ VERSO STEP #2 requires **4** input files which must be positioned in the folder 
 Therefore, a pre-processing step must be executed by the user to impute possible missing values in the _"VF_matrix.csv file"_.
 
 ## FILE B
-* **File name: _"samples_info_matrix.csv"_**
+* **File name: _"samples_info_matrix.txt"_**
 
-* File type: csv (comma separated value)
+* File type: txt (tab-delimited text file)
 
-* Content: a csv file including the key information about samples, with: 
+* Content: a txt file including the key information about samples, with: 
 
 	* _m_ (samples) rows 
 	
@@ -61,9 +61,9 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 **Warning** : an attribute named "Genotype" (i.e., the number of the clonal genotype of each sample returned by VERSO STEP #1) must necessarily included to perform STEP #2.
 
 ## FILE C
-* **File name: _"variants_info_matrix.csv"_**
+* **File name: _"variants_info_matrix.txt"_**
 
-* File type: csv (comma separated value)
+* File type: txt (tab-delimited text file)
 
 * Content: Variants info matrix, with _n_ rows (variants) and _z_ columns (attributes), each entry includes the value of a specific attribute for any variant to be considered in the analysis. 
  
@@ -79,7 +79,7 @@ Therefore, a pre-processing step must be executed by the user to impute possible
 ## FILE D
 * **File name: _"configuration_VERSO.txt"_**
 
-* File type: txt (textual)
+* File type: txt (tab-delimited text file)
 
 * Content: file including the optional parameters of VERSO STEP #2. Im detail: 
 
