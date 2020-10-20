@@ -12,7 +12,7 @@ Please install the following libraries.
 * [SCANPY 1.6] Follow the instructions at: https://scanpy.readthedocs.io/en/stable/installation.html
 	* use the following command to retrive the proper version of SCANPY:
 
-	pip install scanpy==1.6
+	<pre><code>pip install scanpy==1.6</code></pre>
 
 # INPUTS
   
