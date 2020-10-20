@@ -7,7 +7,7 @@ output: html_document
 
 *VERSO* is an algorithmic framework that processes variants profiles from viral samples, to produce phylogenetic models of viral evolution 
 from clonal variants and to subsequently quantify the intra-host genomic diversity of samples. *VERSO* includes two separate and subsequent 
-steps; in this repository we provide an R implementation of VERSO STEP #1. 
+steps; in this repository we provide an R implementation of VERSO STEP 1. 
 
 ```{r include=FALSE}
 library(knitr)
