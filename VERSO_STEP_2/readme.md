@@ -9,11 +9,10 @@ Please install the following libraries.
 
 * [Python 3.6.x] Follow the instructions at: https://www.python.org/downloads/
 
-* [SCANPY 1.6] Follow the instructions at: https://scanpy.readthedocs.io/en/stable/installation.html
-	* use the following command to retrive the proper version of SCANPY:
+* [SCANPY 1.6] Run this command via PIP to install the proper version:
 
 	<pre><code>pip install scanpy==1.6</code></pre>
-
+Further details at: https://scanpy.readthedocs.io/en/stable/installation.html
 # INPUTS
   
 VERSO STEP #2 requires **4** input files which must be positioned in the folder of the script and detailed as follows.
