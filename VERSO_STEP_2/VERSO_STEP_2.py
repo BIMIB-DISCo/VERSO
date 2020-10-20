@@ -4,7 +4,6 @@ import os
 os.chdir(os.getcwd())
 os.getcwd()
 
-import dill
 import pickle
 import gc
 gc.collect()
@@ -24,7 +23,6 @@ from matplotlib import colors
 import seaborn as sb
 import anndata as an
 from scipy import sparse
-from pybiomart import Dataset
 
 plt.rcParams['figure.figsize']=(8,8) #rescale figures
 sc.settings.verbosity = 3
@@ -39,6 +37,8 @@ def colormap(fig,nax):
     fig.colorbar(cm.ScalarMappable(norm=cnorm, cmap=None), ax=ax1)
     fig.delaxes(fig.get_axes()[-2])
 
+if not os.path.exists("OUTPUT"):
+    os.makedirs("OUTPUT")
 
 # Please LOAD the INPUT FILES. For the specifications refer to the readme at this link: 
 #https://github.com/BIMIB-DISCo/VERSO/tree/VERSO/VERSO_STEP_2
@@ -106,7 +106,8 @@ how_many_clusters = len(genotype_list)
 
 for x in range(how_many_clusters):
     print('G'+str(genotype_list[x]))
-    temp = ('G'+str(genotype_list[x]))
+    temp = ('OUTPUT/G'+str(genotype_list[x])+'_OUTPUT')
+    os.mkdir(temp)
     temp_title = ('Genotype '+str(genotype_list[x]))
         
     adata_all_cluster = adata_all_subset_variants_samples[adata_all_subset_variants_samples.obs['Genotype'] == genotype_list[x]].copy()   
@@ -126,9 +127,8 @@ for x in range(how_many_clusters):
         sc.tl.umap(adata_all_cluster, random_state=1, a = input_a_UMAP, b = input_b_UMAP, 
                    spread = input_spread_UMAP, min_dist = input_min_dist_UMAP)
 
-        temp_file = temp+'.svg'
-        temp_output = temp+'_OUTPUT.csv'
-        temp_file_distances = temp+'_distances.txt'
+        temp_output = temp+'/CLUSTER.csv'
+        temp_file_distances = temp+'/distances.txt'
 
         if how_many_samples > 500:
             size_nodes = 50
@@ -139,7 +139,7 @@ for x in range(how_many_clusters):
         for i in range(len(assignments.columns)):
             if assignments.columns[i] != 'Genotype':
             	if assignments.columns[i] != 'Selected':
-		            temp_file = temp+'_'+assignments.columns[i]+'.svg'
+		            temp_file = temp+'/'+assignments.columns[i]+'.svg'
 		            temp_title_fin = temp_title + ' ' + assignments.columns[i]
 		            sc.pl.umap(adata_all_cluster, color=([str(assignments.columns[i])]), 
 		                       legend_loc='right margin', edges = 'TRUE', 
@@ -147,7 +147,7 @@ for x in range(how_many_clusters):
 		                       title = temp_title_fin , show=False)
 		            plt.savefig(temp_file,bbox_inches='tight')
         
-        temp_file = temp + '_Leiden_clusters.svg'
+        temp_file = temp + '/Leiden_clusters.svg'
         temp_title_fin = temp_title + ' Leiden_clusters'
         sc.pl.umap(adata_all_cluster, color=('Leiden_clusters'),                    
                    legend_loc='right margin', edges = 'TRUE', 
