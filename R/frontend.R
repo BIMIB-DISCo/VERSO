@@ -3,6 +3,7 @@
 #'
 #' @examples
 #' data(variants)
+#' set.seed(12345)
 #' inference = VERSO(D = variants, 
 #'                   alpha = c(0.01,0.05), 
 #'                   beta = c(0.01,0.05), 
@@ -11,7 +12,6 @@
 #'                   num_iter = 100, 
 #'                   n_try_bs = 50, 
 #'                   num_processes = 1, 
-#'                   seed = 12345, 
 #'                   verbose = FALSE)
 #'
 #' @param D Input data for the inference reporting presence (as 1), absense (as 0) or missing 
@@ -29,7 +29,6 @@
 #' @param n_try_bs Number of steps without changes in likelihood of best solution after which to stop the MCMC.
 #' @param num_processes Number of processes to be used during parallel execution. To execute in single process mode, 
 #' this parameter needs to be set to either 1, NA or NULL.
-#' @param seed Seed for reproducibility.
 #' @param verbose Boolean. Shall I print to screen information messages during the execution?
 #' @return A list of 8 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, 
 #' genotypes_summary, log_likelihood and error_rates. Here, B returns the maximum likelihood variants tree 
@@ -45,11 +44,8 @@
 #' @importFrom Rfast rowMaxs rowsums
 #' @importFrom stats runif dist
 #'
-VERSO <- function( D, alpha = NULL, beta = NULL, check_indistinguishable = TRUE, num_rs = 10, num_iter = 10000, n_try_bs = 1000, num_processes = Inf, seed = NULL, verbose = TRUE ) {
+VERSO <- function( D, alpha = NULL, beta = NULL, check_indistinguishable = TRUE, num_rs = 10, num_iter = 10000, n_try_bs = 1000, num_processes = Inf, verbose = TRUE ) {
     
-    # set the seed
-    set.seed(seed)
-
     # set storage mode to integer
     storage.mode(D) <- "integer"
     
@@ -156,7 +152,6 @@ VERSO <- function( D, alpha = NULL, beta = NULL, check_indistinguishable = TRUE,
                                                             num_rs = num_rs, 
                                                             num_iter = num_iter, 
                                                             n_try_bs = n_try_bs, 
-                                                            seed = round(runif(1)*10000), 
                                                             verbose = verbose)
             
         }
@@ -182,7 +177,6 @@ VERSO <- function( D, alpha = NULL, beta = NULL, check_indistinguishable = TRUE,
                                                        num_rs = num_rs, 
                                                        num_iter = num_iter, 
                                                        n_try_bs = n_try_bs, 
-                                                       seed = round(runif(1)*10000), 
                                                        verbose = verbose)
 
         })
