@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">VERSO</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.12</span>
       </span>
     </div>
 
@@ -73,7 +73,8 @@
 
       
 
-      </header><script src="2_running_VERSO_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="2_running_VERSO_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="2_running_VERSO_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="2_running_VERSO_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Running VERSO</h1>
@@ -103,8 +104,9 @@
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span></pre></div>
 <pre><code>## [1] 0.01 0.05</code></pre>
-<p>We can now perform the inference as follow.</p>
+<p>We can now perform the inference as follow. Make sure to set the random seed to ensure reproducibility.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span>
 <span class="va">inference</span> <span class="op">=</span> <span class="fu"><a href="../reference/VERSO.html">VERSO</a></span><span class="op">(</span>D <span class="op">=</span> <span class="va">variants</span>, 
                   alpha <span class="op">=</span> <span class="va">alpha</span>, 
                   beta <span class="op">=</span> <span class="va">beta</span>, 
@@ -113,7 +115,6 @@
                   num_iter <span class="op">=</span> <span class="fl">100</span>, 
                   n_try_bs <span class="op">=</span> <span class="fl">50</span>, 
                   num_processes <span class="op">=</span> <span class="fl">1</span>, 
-                  seed <span class="op">=</span> <span class="fl">12345</span>, 
                   verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
 <p>We notice that the inference resulting on the command above should be considered only as an example; the parameters num rs, num iter and n try bs representing the number of steps perfomed during the inference are downscaled to reduce execution time. We refer to the Manual for discussion on default values. We provide within the package results of the inference performed with the same parameters as RData.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">VERSO</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.12</span>
       </span>
     </div>
 
@@ -135,7 +135,6 @@
   num_iter <span class='op'>=</span> <span class='fl'>10000</span>,
   n_try_bs <span class='op'>=</span> <span class='fl'>1000</span>,
   num_processes <span class='op'>=</span> <span class='cn'>Inf</span>,
-  seed <span class='op'>=</span> <span class='cn'>NULL</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
@@ -144,21 +143,25 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>D</th>
-      <td><p>Input data for the inference reporting presence (as 1), absense (as 0) or missing information (as NA) for a set of variants.</p></td>
+      <td><p>Input data for the inference reporting presence (as 1), absense (as 0) or missing 
+information (as NA) for a set of variants.</p></td>
     </tr>
     <tr>
       <th>alpha</th>
-      <td><p>False positive error rate provided as a verctor; if a vector of alpha (and beta) is provided, the inference is performed 
+      <td><p>False positive error rate provided as a verctor; if a vector of alpha (and beta) 
+is provided, the inference is performed 
 for multiple values and the solution at maximum-likelihood is returned.</p></td>
     </tr>
     <tr>
       <th>beta</th>
-      <td><p>False negative error rate provided as a verctor; if a vector of beta (and alpha) is provided, the inference is performed 
+      <td><p>False negative error rate provided as a verctor; if a vector of beta (and alpha) 
+is provided, the inference is performed 
 for multiple values and the solution at maximum-likelihood is returned.</p></td>
     </tr>
     <tr>
       <th>check_indistinguishable</th>
-      <td><p>Boolean. Shall I remove any indistinguishable variant from input data prior inference?</p></td>
+      <td><p>Boolean. Shall I remove any indistinguishable variant 
+from input data prior inference?</p></td>
     </tr>
     <tr>
       <th>num_rs</th>
@@ -178,10 +181,6 @@ for multiple values and the solution at maximum-likelihood is returned.</p></td>
 this parameter needs to be set to either 1, NA or NULL.</p></td>
     </tr>
     <tr>
-      <th>seed</th>
-      <td><p>Seed for reproducibility.</p></td>
-    </tr>
-    <tr>
       <th>verbose</th>
       <td><p>Boolean. Shall I print to screen information messages during the execution?</p></td>
     </tr>
@@ -189,15 +188,18 @@ this parameter needs to be set to either 1, NA or NULL.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of 8 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, genotypes_summary, log_likelihood and error_rates. 
-Here, B returns the maximum likelihood variants tree (inner nodes of the phylogenetic tree), C the attachment of patients to genotypes and phylogenetic_tree 
-VERSO phylogenetic tree, including both variants tree and patients attachments to variants; corrected_genotypes is the corrected genotypes, which corrects 
-D given VERSO phylogenetic tree, genotypes_prevalence the number of patients and observed prevalence of each genotype and genotypes_summary provide a 
-summary of association of mutations to genotypes; finally log_likelihood and error_rates return the likelihood of the inferred phylogenetic moldel and 
+    <p>A list of 8 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, 
+genotypes_summary, log_likelihood and error_rates. Here, B returns the maximum likelihood variants tree 
+(inner nodes of the phylogenetic tree), C the attachment of patients to genotypes and phylogenetic_tree VERSO 
+phylogenetic tree, including both variants tree and patients attachments to variants; corrected_genotypes is the 
+corrected genotypes, which corrects D given VERSO phylogenetic tree, genotypes_prevalence the number of patients 
+and observed prevalence of each genotype and genotypes_summary provide a summary of association of mutations 
+to genotypes; finally log_likelihood and error_rates return the likelihood of the inferred phylogenetic moldel and 
 best values of alpha and beta as estimated by VERSO.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>variants</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>12345</span><span class='op'>)</span>
 <span class='va'>inference</span> <span class='op'>=</span> <span class='fu'>VERSO</span><span class='op'>(</span>D <span class='op'>=</span> <span class='va'>variants</span>, 
                   alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.01</span>,<span class='fl'>0.05</span><span class='op'>)</span>, 
                   beta <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.01</span>,<span class='fl'>0.05</span><span class='op'>)</span>, 
@@ -206,7 +208,6 @@ best values of alpha and beta as estimated by VERSO.</p>
                   num_iter <span class='op'>=</span> <span class='fl'>100</span>, 
                   n_try_bs <span class='op'>=</span> <span class='fl'>50</span>, 
                   num_processes <span class='op'>=</span> <span class='fl'>1</span>, 
-                  seed <span class='op'>=</span> <span class='fl'>12345</span>, 
                   verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 </div></pre>
