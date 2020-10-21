@@ -23,9 +23,10 @@ head(alpha)
 head(beta)
 ```
 
-We can now perform the inference as follow. 
+We can now perform the inference as follow. Make sure to set the random seed to ensure reproducibility. 
 
 ```{r}
+set.seed(12345)
 inference = VERSO(D = variants, 
                   alpha = alpha, 
                   beta = beta, 
@@ -34,7 +35,6 @@ inference = VERSO(D = variants,
                   num_iter = 100, 
                   n_try_bs = 50, 
                   num_processes = 1, 
-                  seed = 12345, 
                   verbose = FALSE)
 ```
 

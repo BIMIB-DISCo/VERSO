@@ -13,20 +13,23 @@ VERSO(
   num_iter = 10000,
   n_try_bs = 1000,
   num_processes = Inf,
-  seed = NULL,
   verbose = TRUE
 )
 }
 \arguments{
-\item{D}{Input data for the inference reporting presence (as 1), absense (as 0) or missing information (as NA) for a set of variants.}
+\item{D}{Input data for the inference reporting presence (as 1), absense (as 0) or missing 
+information (as NA) for a set of variants.}
 
-\item{alpha}{False positive error rate provided as a verctor; if a vector of alpha (and beta) is provided, the inference is performed 
+\item{alpha}{False positive error rate provided as a verctor; if a vector of alpha (and beta) 
+is provided, the inference is performed 
 for multiple values and the solution at maximum-likelihood is returned.}
 
-\item{beta}{False negative error rate provided as a verctor; if a vector of beta (and alpha) is provided, the inference is performed 
+\item{beta}{False negative error rate provided as a verctor; if a vector of beta (and alpha) 
+is provided, the inference is performed 
 for multiple values and the solution at maximum-likelihood is returned.}
 
-\item{check_indistinguishable}{Boolean. Shall I remove any indistinguishable variant from input data prior inference?}
+\item{check_indistinguishable}{Boolean. Shall I remove any indistinguishable variant 
+from input data prior inference?}
 
 \item{num_rs}{Number of restarts during MCMC inference.}
 
@@ -37,16 +40,16 @@ for multiple values and the solution at maximum-likelihood is returned.}
 \item{num_processes}{Number of processes to be used during parallel execution. To execute in single process mode, 
 this parameter needs to be set to either 1, NA or NULL.}
 
-\item{seed}{Seed for reproducibility.}
-
 \item{verbose}{Boolean. Shall I print to screen information messages during the execution?}
 }
 \value{
-A list of 8 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, genotypes_summary, log_likelihood and error_rates. 
-Here, B returns the maximum likelihood variants tree (inner nodes of the phylogenetic tree), C the attachment of patients to genotypes and phylogenetic_tree 
-VERSO phylogenetic tree, including both variants tree and patients attachments to variants; corrected_genotypes is the corrected genotypes, which corrects 
-D given VERSO phylogenetic tree, genotypes_prevalence the number of patients and observed prevalence of each genotype and genotypes_summary provide a 
-summary of association of mutations to genotypes; finally log_likelihood and error_rates return the likelihood of the inferred phylogenetic moldel and 
+A list of 8 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, 
+genotypes_summary, log_likelihood and error_rates. Here, B returns the maximum likelihood variants tree 
+(inner nodes of the phylogenetic tree), C the attachment of patients to genotypes and phylogenetic_tree VERSO 
+phylogenetic tree, including both variants tree and patients attachments to variants; corrected_genotypes is the 
+corrected genotypes, which corrects D given VERSO phylogenetic tree, genotypes_prevalence the number of patients 
+and observed prevalence of each genotype and genotypes_summary provide a summary of association of mutations 
+to genotypes; finally log_likelihood and error_rates return the likelihood of the inferred phylogenetic moldel and 
 best values of alpha and beta as estimated by VERSO.
 }
 \description{
@@ -54,6 +57,7 @@ Perform the inference of the maximum log-likelihood VERSO phylogenetic tree.
 }
 \examples{
 data(variants)
+set.seed(12345)
 inference = VERSO(D = variants, 
                   alpha = c(0.01,0.05), 
                   beta = c(0.01,0.05), 
@@ -62,7 +66,6 @@ inference = VERSO(D = variants,
                   num_iter = 100, 
                   n_try_bs = 50, 
                   num_processes = 1, 
-                  seed = 12345, 
                   verbose = FALSE)
 
 }

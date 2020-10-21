@@ -1,9 +1,6 @@
 # learn VERSO phylogenetic tree from data
-learn.VERSO.phylogenetic.tree <- function( D, alpha = 10^-3, beta = 10^-3, initialization = NULL, num_rs = 10, num_iter = 10000, n_try_bs = 1000, seed = NULL, verbose = TRUE ) {
+learn.VERSO.phylogenetic.tree <- function( D, alpha = 10^-3, beta = 10^-3, initialization = NULL, num_rs = 10, num_iter = 10000, n_try_bs = 1000, verbose = TRUE ) {
     
-    # set the seed
-    set.seed(seed)
-
     # initialize global variables (best solution among all restarts)
     B_global <- NULL
     C_global <- NULL
