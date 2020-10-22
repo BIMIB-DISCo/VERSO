@@ -3,6 +3,7 @@
 ^.gitignore$
 ^.travis.yml$
 ^.git/.*$
+^.github
 ^.github/.*$
 ^_pkgdown\.yml$
 ^docs$
