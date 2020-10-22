@@ -8,7 +8,7 @@ In this repository we provide an R implementation of *VERSO*.
 
 *VERSO* is an algorithmic framework that processes variants profiles from viral samples to produce phylogenetic 
 models of viral evolution. The approach solves a Boolean Matrix Factorization problem with phylogenetic constraints, 
-by maximizing a log-likelihood function. *VERS* includes two separate and subsequent steps; in this repository we provide 
+by maximizing a log-likelihood function. *VERSO* includes two separate and subsequent steps; in this repository we provide 
 an R implementation of VERSO STEP #1. 
 
 The R version of *VERSO* can be installed from Github. To do so, we need to install the R packages *VERSO* depends on and the devtools package. 
