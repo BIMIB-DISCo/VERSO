@@ -148,41 +148,14 @@ move.B <- function( B ) {
     if(p<0.55) {
 
         # nodes relabeling
-        chosen <- sample(2:ncol(B),2,replace=FALSE)
-        tmp <- colnames(B)[chosen[1]]
-        colnames(B)[chosen[1]] <- colnames(B)[chosen[2]]
-        colnames(B)[chosen[2]] <- tmp
+        B <- relabeling(B=B)
 
     }
     # perform structural moves with 40% probability
     else if(p>=0.55&&p<0.95) {
 
-        # change one arch
-        is_not_valid <- TRUE
-        while(is_not_valid) {
-            ch_1 <- sample(3:nrow(B),1)
-            ch_2 <- sample(seq_len((ch_1-1)),1)
-            # a pair of two nodes are a valid set if the nodes are not already directly connected
-            if(!(all(B[ch_1,seq_len(ch_2)]==B[ch_2,seq_len(ch_2)])&&sum(B[ch_1,])==(sum(B[ch_2,])+1))) {
-                is_not_valid <- FALSE
-            }
-        }
-
-        # performing move on ch_1
-        ch_1_bkp <- B[ch_1,seq_len(ch_1)]
-        B[ch_1,seq_len((ch_1-1))] <- c(1L,rep(0L,(ch_1-2)))
-        B[ch_1,] <- B[ch_1,] + B[ch_2,]
-        
-        # performing move on children of ch_1
-        if(ch_1 != nrow(B)) {
-            for(i in (ch_1+1):nrow(B)) {
-                if(all(ch_1_bkp==B[i,seq_len(ch_1)])) {
-                    B[i,seq_len((ch_1-1))] <- c(1L,rep(0L,(ch_1-2)))
-                    B[i,] <- B[i,] + B[ch_2,]
-                }
-            }
-        }
-        B[which(B>1)] <- 1L
+        # prune and reattach
+        B <- prune.and.reattach(B=B)
         
     }
     # perform full relabeling with 5% probability
