@@ -136,3 +136,64 @@
     return(B)
     
 }
+
+# perform node relabeling
+"relabeling" <- function(B) {
+    
+    # relabeling
+    chosen <- sample(2:ncol(B),2,replace=FALSE)
+    tmp <- colnames(B)[chosen[1]]
+    colnames(B)[chosen[1]] <- colnames(B)[chosen[2]]
+    colnames(B)[chosen[2]] <- tmp
+    return(B)
+    
+}
+
+# perform prune and reattach
+"prune.and.reattach" <- function(B) {
+    
+    # change one arch
+    is_not_valid <- TRUE
+    while(is_not_valid) {
+        
+        #Select source node
+        ch_1 <- sample(x=2:nrow(B),size=1)
+        ch_1_gen <- B[ch_1,1:ch_1]
+        remaing_node <- as.numeric(which(apply(B[,1:ch_1], c(1), FUN = function(x){!all(x == ch_1_gen)})))
+        
+        # chose the target node from the nodes not included in the subtree where ch_1 is the root
+        if(length(remaing_node) > 1) {
+            
+            ch_2 <- sample(x=remaing_node,size=1)
+            
+        } else if(length(remaing_node)==1) {
+            
+            ch_2 <- remaing_node
+            
+        } else {
+            # if there aren't any nodes, select a different source
+            next;
+        }
+
+        # a pair of two nodes is valid if the nodes are not already directly connected
+        if(!(all(B[ch_1,1:ch_2]==B[ch_2,1:ch_2])&sum(B[ch_1,])==(sum(B[ch_2,])+1))) {
+            is_not_valid <- FALSE
+        }
+        
+    }
+    
+    descendent_nodes <- setdiff(1:nrow(B), remaing_node)
+    
+    # extract descendent node submatrix
+    rem_B <- B[remaing_node,remaing_node,drop=FALSE]
+    new_B <- matrix(data = 0L, nrow = nrow(rem_B), ncol = ncol(B))
+    colnames(new_B) <- c(colnames(B)[remaing_node], colnames(B)[descendent_nodes])
+    new_B[1:length(remaing_node),1:length(remaing_node)] <- rem_B
+    gen_ch_2 <- new_B[which(colnames(new_B)==colnames(B)[ch_2]),1:length(remaing_node)]
+    desc_B <- cbind(matrix(rep(gen_ch_2,each=length(descendent_nodes)),  nrow = length(descendent_nodes)), 
+                    B[descendent_nodes,descendent_nodes,drop=FALSE])
+    new_B <- rbind(new_B,desc_B)
+    
+    return(new_B)
+    
+}
