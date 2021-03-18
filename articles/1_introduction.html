@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">VERSO</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -58,8 +60,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/BIMIB-DISCo/VERSO/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/BIMIB-DISCo/VERSO/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -73,14 +75,13 @@
 
       
 
-      </header><script src="1_introduction_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="1_introduction_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="1_introduction_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="1_introduction_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/BIMIB-DISCo/VERSO/blob/master/vignettes/1_introduction.Rmd"><code>vignettes/1_introduction.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/BIMIB-DISCo/VERSO/blob/master/vignettes/1_introduction.Rmd" class="external-link"><code>vignettes/1_introduction.Rmd</code></a></small>
       <div class="hidden name"><code>1_introduction.Rmd</code></div>
 
     </div>
@@ -96,18 +97,18 @@
 <h2 class="hasAnchor">
 <a href="#installing-verso" class="anchor"></a>Installing VERSO</h2>
 <p>The R version of <em>VERSO</em> can be installed from Github. To do so, we need to install the R packages <em>VERSO</em> depends on and the devtools package.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># install VERSO dependencies</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="http://ape-package.ird.fr/">"ape"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ape"</span><span class="op">)</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/RfastOfficial/Rfast">"Rfast"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"Rfast"</span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install VERSO dependencies</span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="http://ape-package.ird.fr/" class="external-link">"ape"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ape"</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/RfastOfficial/Rfast" class="external-link">"Rfast"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Rfast"</span><span class="op">)</span>
 
 <span class="co"># install VERSO library</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
 <span class="fu">install_github</span><span class="op">(</span><span class="st">"BIMIB-DISCo/VERSO"</span>, ref <span class="op">=</span> <span class="st">"master"</span><span class="op">)</span>
 
 <span class="co"># load VERSO library</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/BIMIB-DISCo/VERSO">"VERSO"</a></span><span class="op">)</span></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/BIMIB-DISCo/VERSO" class="external-link">"VERSO"</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="debug" class="section level2">
 <h2 class="hasAnchor">
@@ -127,11 +128,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniele Ramazzotti, Fabrizio Angaroni, Davide Maspero, Alex Graudenzi.</p>
+  <p></p>
+<p>Developed by Daniele Ramazzotti, Fabrizio Angaroni, Davide Maspero, Alex Graudenzi.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
@@ -139,6 +142,8 @@
 
   
 
+
+  
 
   </body>
 </html>

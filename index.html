@@ -28,6 +28,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -40,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">VERSO</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -68,7 +70,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/BIMIB-DISCo/VERSO/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -91,67 +93,75 @@
 <p>In this repository we provide an R implementation of <em>VERSO</em>.</p>
 <p><em>VERSO</em> is an algorithmic framework that processes variants profiles from viral samples to produce phylogenetic models of viral evolution. The approach solves a Boolean Matrix Factorization problem with phylogenetic constraints, by maximizing a log-likelihood function. <em>VERSO</em> includes two separate and subsequent steps; in this repository we provide an R implementation of VERSO STEP #1.</p>
 <p>The R version of <em>VERSO</em> can be installed from Github. To do so, we need to install the R packages <em>VERSO</em> depends on and the devtools package.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># install VERSO dependencies</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="http://ape-package.ird.fr/">"ape"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ape"</span><span class="op">)</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/RfastOfficial/Rfast">"Rfast"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"Rfast"</span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install VERSO dependencies</span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="http://ape-package.ird.fr/" class="external-link">"ape"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ape"</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/RfastOfficial/Rfast" class="external-link">"Rfast"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Rfast"</span><span class="op">)</span>
 
 <span class="co"># install VERSO library</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
 <span class="fu">install_github</span><span class="op">(</span><span class="st">"BIMIB-DISCo/VERSO"</span>, ref <span class="op">=</span> <span class="st">"master"</span><span class="op">)</span>
 
 <span class="co"># load VERSO library</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/BIMIB-DISCo/VERSO">"VERSO"</a></span><span class="op">)</span></pre></div>
-<p>Please feel free to contact us if you have problems running our tool at <a href="mailto:daniele.ramazzotti1@gmail.com" class="email">daniele.ramazzotti1@gmail.com</a> or <a href="mailto:d.maspero@campus.unimib.it" class="email">d.maspero@campus.unimib.it</a>.</p>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/BIMIB-DISCo/VERSO" class="external-link">"VERSO"</a></span><span class="op">)</span></code></pre></div>
+<p>Please feel free to contact us if you have problems running our tool at daniele.ramazzotti1@gmail.com or d.maspero@campus.unimib.it.</p>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li>Download from BIOC at <br><a href="https://www.bioconductor.org/packages/VERSO">https://​www.bioconductor.org/​packages/​VERSO</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/BIMIB-DISCo/VERSO/">https://​github.com/​BIMIB-DISCo/​VERSO/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/BIMIB-DISCo/VERSO">https://​github.com/​BIMIB-DISCo/​VERSO</a>
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
+
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Daniele Ramazzotti <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-6087-2666" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Fabrizio Angaroni <br><small class="roles"> Author </small>  </li>
 <li>Davide Maspero <br><small class="roles"> Maintainer, author </small>  </li>
 <li>Alex Graudenzi <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/BIMIB-DISCo/VERSO/actions?query=workflow%3Acheck-master"><img src="https://github.com/BIMIB-DISCo/VERSO/workflows/check-master/badge.svg" alt="Actions Status"></a></li>
-<li><a href="https://github.com/BIMIB-DISCo/VERSO/actions?query=workflow%3Acheck-development"><img src="https://github.com/BIMIB-DISCo/VERSO/workflows/check-development/badge.svg" alt="Actions Status"></a></li>
+<li><a href="https://github.com/BIMIB-DISCo/VERSO/actions?query=workflow%3Acheck-master" class="external-link"><img src="https://github.com/BIMIB-DISCo/VERSO/workflows/check-master/badge.svg" alt="Actions Status"></a></li>
+<li><a href="https://github.com/BIMIB-DISCo/VERSO/actions?query=workflow%3Acheck-development" class="external-link"><img src="https://github.com/BIMIB-DISCo/VERSO/workflows/check-development/badge.svg" alt="Actions Status"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniele Ramazzotti, Fabrizio Angaroni, Davide Maspero, Alex Graudenzi.</p>
+  <p></p>
+<p>Developed by Daniele Ramazzotti, Fabrizio Angaroni, Davide Maspero, Alex Graudenzi.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
@@ -159,6 +169,8 @@
 
   
 
+
+  
 
   </body>
 </html>
