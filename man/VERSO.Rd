@@ -9,11 +9,13 @@ VERSO(
   alpha = NULL,
   beta = NULL,
   check_indistinguishable = TRUE,
+  marginalize = FALSE,
   num_rs = 10,
   num_iter = 10000,
   n_try_bs = 1000,
   num_processes = Inf,
-  verbose = TRUE
+  verbose = TRUE,
+  log_file = ""
 )
 }
 \arguments{
@@ -31,6 +33,8 @@ for multiple values and the solution at maximum-likelihood is returned.}
 \item{check_indistinguishable}{Boolean. Shall I remove any indistinguishable variant 
 from input data prior inference?}
 
+\item{marginalize}{Boolean. Shall I marginalize C when computing likelihood?}
+
 \item{num_rs}{Number of restarts during MCMC inference.}
 
 \item{num_iter}{Maximum number of MCMC steps to be performed during the inference.}
@@ -41,6 +45,8 @@ from input data prior inference?}
 this parameter needs to be set to either 1, NA or NULL.}
 
 \item{verbose}{Boolean. Shall I print to screen information messages during the execution?}
+
+\item{log_file}{log file where to print outputs when using parallel. If parallel execution is disabled, this parameter is ignored.}
 }
 \value{
 A list of 8 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, 
