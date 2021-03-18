@@ -1,10 +1,15 @@
 # learn VERSO phylogenetic tree from data
-learn.VERSO.phylogenetic.tree <- function( D, alpha = 10^-3, beta = 10^-3, initialization = NULL, num_rs = 10, num_iter = 10000, n_try_bs = 1000, verbose = TRUE ) {
-    
-    # initialize global variables (best solution among all restarts)
-    B_global <- NULL
-    C_global <- NULL
-    lik_global <- NULL
+learn.VERSO.phylogenetic.tree <- function( D, 
+                                           alpha = 10^-3, 
+                                           beta = 10^-3, 
+                                           initialization = NULL, 
+                                           marginalize = FALSE,
+                                           num_rs = 10, 
+                                           num_iter = 10000, 
+                                           n_try_bs = 1000, 
+                                           num_processes = Inf, 
+                                           verbose = TRUE,
+                                           log_file = "" ) {
     
     # we remove any NA from data
     if(any(is.na(D))) {
@@ -13,105 +18,160 @@ learn.VERSO.phylogenetic.tree <- function( D, alpha = 10^-3, beta = 10^-3, initi
     storage.mode(D) <- "integer"
     
     # perform a number of num_rs restarts
-    for(i in seq_len(num_rs)) {
+    if(num_processes > 1) {
         
-        if(verbose) {
-            message("Performing restart number ",i," out of ",num_rs)
-        }
+        parallel_cl <- makeCluster(num_processes,outfile=log_file)
         
-        # initialize B
-        if(i==1) {
-            if(is.null(initialization)) {
-                B <- initialize.B(D)
-            }
-            else {
-                B <- initialization
-                storage.mode(B) <- "integer"
-            }
-        }
-        else {
-            # perform random shuffling of nodes/variants ordering
-            B <- B_global
-            colnames(B) <- c("r",sample(seq_len((ncol(B)-1))))
-        }
+        clusterExport(parallel_cl,varlist=c("D","lik_w","alpha","beta","initialization","marginalize","num_rs","num_iter","n_try_bs","error_move","verbose","log_file"),envir=environment())
+        clusterExport(parallel_cl,c("MCMC","initialize.B","move.B", "relabeling", "prune.and.reattach", "compute.C"),envir=environment())
+        clusterSetRNGStream(parallel_cl,iseed=round(runif(1)*100000))
         
-        # compute C given B
-        res <- compute.C(B,D,alpha,beta)
-        C <- res$C
-        lik <- res$lik
-        
-        # initialize result variables (best solution for the current restart)
-        B_best <- B
-        C_best <- C
-        lik_best <- lik
-        count_lik_best_cons <- 0
-        
-        # repeat MCMC moves until num_iter number of iterations is performed
-        for(j in seq_len(num_iter)) {
+        mcmc_res <- parLapply(parallel_cl,1:num_rs,function(x) {
             
-            if(verbose&&(j%%100)==0) {
-                message("Performing iteration number ",j," out of ",num_iter," | Current best log-likelihood ",lik_best)
-            }
+            MCMC( D = D, 
+                  alpha = alpha, 
+                  beta = beta, 
+                  initialization = initialization, 
+                  marginalize = marginalize, 
+                  num_iter = num_iter, 
+                  n_try_bs = n_try_bs, 
+                  rs_i = x, 
+                  verbose = verbose, 
+                  log_file = log_file )
             
-            # perform a move on B
-            B_tmp <- move.B(B)
-            
-            # compute C at maximun likelihood given B_tmp and returns its likelihood
-            res <- compute.C(B_tmp,D,alpha,beta)
-            C_tmp <- res$C
-            lik_tmp <- res$lik
-            
-            # if likelihood at current step is better than best likelihood, replace best model with current
-            if(lik_tmp>lik_best) {
-                B_best <- B_tmp
-                C_best <- C_tmp
-                lik_best <- lik_tmp
-                count_lik_best_cons <- 0
-                B <- B_best
-                C <- C_best
-                lik <- lik_best
-            }
-            else {
-                # update count
-                count_lik_best_cons <- count_lik_best_cons + 1
-                if(count_lik_best_cons>n_try_bs) {
-                    # print a message
-                    if(verbose) {
-                        message("Not improving likelihood of best solution after ",n_try_bs," iterations. Skipping to next restart")
-                    }
-                    break;
-                }
-                # take the current state with a probability proportional to the ratio of the two likelihoods
-                rho <- min(exp((lik_tmp-lik)),1)
-                if(runif(1)<=rho) {
-                    B <- B_tmp
-                    C <- C_tmp
-                    lik <- lik_tmp
-                }
-            }
-            
-        }
-
-        # compare current best solution with best global solution
-        if(is.null(lik_global)||(lik_best>lik_global)) {
-            B_global <- B_best
-            C_global <- C_best
-            lik_global <- lik_best
-        }
+        })
         
+        stopCluster(parallel_cl)
+        
+    } else {
+        mcmc_res <- list()
+        for(i in seq_len(num_rs)) {
+            mcmc_res[[i]] <- MCMC( D = D, 
+                                   alpha = alpha, 
+                                   beta = beta, 
+                                   initialization = initialization, 
+                                   marginalize = marginalize, 
+                                   num_iter = num_iter, 
+                                   n_try_bs = n_try_bs, 
+                                   rs_i = i, 
+                                   verbose = verbose, 
+                                   log_file=log_file )
+        }
     }
 
+    if(num_rs > 1) {
+        best_lik <- c()
+        for(i in  1:num_rs) {
+            best_lik <- c(best_lik, mcmc_res[[i]]$log_likelihood)
+        }
+        idx_bjl <- which(best_lik == max(best_lik))
+        best_mcmc <- mcmc_res[[idx_bjl[1]]]
+    } else {
+        best_mcmc <-  mcmc_res[[1]]
+    }
+    
     # renaming
-    rownames(B_global) <- paste0("G",seq_len(nrow(B_global)))
-    colnames(B_global) <- c("Reference",colnames(D)[as.numeric(colnames(B_global)[2:ncol(B_global)])])
-    C_global <- matrix(paste0("G",C_global),ncol=1)
-    rownames(C_global) <- rownames(D)
-    colnames(C_global) <- "Genotype"
+    rownames(best_mcmc$B) <- paste0("G",seq_len(nrow(best_mcmc$B)))
+    colnames(best_mcmc$B) <- c("Reference",colnames(D)[as.numeric(colnames(best_mcmc$B)[2:ncol(best_mcmc$B)])])
+    best_mcmc$C <- matrix(paste0("G",best_mcmc$C),ncol=1)
+    rownames(best_mcmc$C) <- rownames(D)
+    colnames(best_mcmc$C) <- "Genotype"
+    
+    return(best_mcmc)
+    
+}
 
+# perform MCMC
+MCMC <- function( D, 
+                  alpha = 10^-3, 
+                  beta = 10^-3, 
+                  initialization = NULL, 
+                  marginalize = FALSE, 
+                  num_rs = 10, 
+                  num_iter = 10000, 
+                  n_try_bs = 1000, 
+                  rs_i = NULL, 
+                  verbose = TRUE, 
+                  log_file = "" ) {
     
-    # return maximum likelihood solution
-    return(list(B=B_global,C=C_global,log_likelihood=lik_global))
+    # initialize B
+    if(is.null(initialization)) {
+        B <- initialize.B(D)
+    }
+    else {
+        B <- initialization
+        storage.mode(B) <- "integer"
+    }
+
+    # compute C given B
+    res <- compute.C(B,D,alpha,beta)
+    C <- res$C
+    lik <- res$lik
     
+    # initialize result variables (best solution for the current restart)
+    B_best <- B
+    C_best <- C
+    lik_best <- lik
+    count_lik_best_cons <- 0
+    
+    # repeat MCMC moves until num_iter number of iterations is performed
+    j = 1
+    while(j <= num_iter) {
+       
+        if(verbose&&(j%%500)==0) {
+            cat("\r", 
+                "Current best lik. = ",format(lik_best, digit = 2, nsmall = 2), 
+                " | Restart # ",rs_i,"/",num_rs," | Iter # ",j, " | Likelihood not improved for ", count_lik_best_cons,"/",n_try_bs," iterations", 
+                "     ", 
+                sep='', 
+                file = log_file, 
+                append = TRUE)
+        }
+        
+        # perform a move on B
+        B_tmp <- move.B(B)
+        
+        # compute C at maximun likelihood given B_tmp and returns its likelihood
+        res <- compute.C(B_tmp,D,alpha,beta)
+        C_tmp <- res$C
+        lik_tmp <- res$lik
+        
+        # if likelihood at current step is better than best likelihood, replace best model with current
+        if(lik_tmp>lik_best) {
+            B_best <- B_tmp
+            C_best <- C_tmp
+            lik_best <- lik_tmp
+            count_lik_best_cons <- 0
+            B <- B_best
+            C <- C_best
+            lik <- lik_best
+        }
+        else {
+            # update count
+            count_lik_best_cons <- count_lik_best_cons + 1
+            if(count_lik_best_cons>n_try_bs) {
+                # print a message
+                if(verbose) {
+                    cat("\r",
+                        "Current best lik. = ",format(lik_best, digit = 2, nsmall = 2), 
+                        " | Restart # ",rs_i,"/",num_rs," | Iter # ",j, " | Likelihood not improved for ", (count_lik_best_cons-1),"/",n_try_bs," iterations", 
+                        "     ", 
+                        "\n", 
+                        sep='')
+                }
+                break;
+            }
+            # take the current state with a probability proportional to the ratio of the two likelihoods
+            rho <- min(exp((lik_tmp-lik)),1)
+            if(runif(1)<=rho) {
+                B <- B_tmp
+                C <- C_tmp
+                lik <- lik_tmp
+            }
+        }
+        j = j + 1
+    }
+    return(list(B=B_best,C=C_best,log_likelihood=lik_best))
 }
 
 # randomly initialize B
@@ -143,55 +203,127 @@ move.B <- function( B ) {
     
     # sample a random probability of choosing a move
     p <- runif(1)
-
+    
     # perform pairwise relabeling with 55% probability
     if(p<0.55) {
-
+        
         # nodes relabeling
         B <- relabeling(B=B)
-
+        
     }
     # perform structural moves with 40% probability
     else if(p>=0.55&&p<0.95) {
-
+        
         # prune and reattach
         B <- prune.and.reattach(B=B)
         
     }
     # perform full relabeling with 5% probability
     else if(p>=0.95) {
-
+        
         # random relabeling of all clones
         colnames(B) <- c("r",sample(seq_len((ncol(B)-1))))
-
+        
     }
     
     # return B
     return(B)
+    
+}
 
+# perform relabeling
+relabeling <- function( B ) {
+    
+    # relabeling
+    chosen <- sample(2:ncol(B),2,replace=FALSE)
+    tmp <- colnames(B)[chosen[1]]
+    colnames(B)[chosen[1]] <- colnames(B)[chosen[2]]
+    colnames(B)[chosen[2]] <- tmp
+    return(B)
+    
+}
+
+# perform prune and reattach
+prune.and.reattach <- function( B ) {
+    
+    # change one arch
+    is_not_valid <- TRUE
+    while(is_not_valid) {
+        
+        # select source node
+        ch_1 <- sample(x=2:nrow(B),size=1)
+        ch_1_gen <- B[ch_1,1:ch_1]
+        remaing_node <- as.numeric(which(apply(B[,1:ch_1], c(1), FUN = function(x){!all(x == ch_1_gen)})))
+        
+        # chose the target node from the nodes not included in the subtree where ch_1 is the root
+        if(length(remaing_node) > 1) {
+            
+            ch_2 <- sample(x=remaing_node,size=1)
+            
+        } else if(length(remaing_node)==1) {
+            
+            ch_2 <- remaing_node
+            
+        } else {
+            # if there aren't any nodes, select a different source
+            next
+        }
+
+        # a pair of two nodes is valid if the nodes are not already directly connected
+        if(!(all(B[ch_1,1:ch_2]==B[ch_2,1:ch_2])&sum(B[ch_1,])==(sum(B[ch_2,])+1))) {
+            is_not_valid <- FALSE
+        }
+        
+    }
+    
+    descendent_nodes <- setdiff(1:nrow(B), remaing_node)
+    
+    # extract descendent node submatrix
+    rem_B <- B[remaing_node,remaing_node,drop=FALSE]
+    new_B <- matrix(data = 0L, nrow = nrow(rem_B), ncol = ncol(B))
+    colnames(new_B) <- c(colnames(B)[remaing_node], colnames(B)[descendent_nodes])
+    new_B[1:length(remaing_node),1:length(remaing_node)] <- rem_B
+    gen_ch_2 <- new_B[which(colnames(new_B)==colnames(B)[ch_2]),1:length(remaing_node)]
+    desc_B <- cbind(matrix(rep(gen_ch_2,each=length(descendent_nodes)),  nrow = length(descendent_nodes)), 
+                    B[descendent_nodes,descendent_nodes,drop=FALSE])
+    new_B <- rbind(new_B,desc_B)
+    
+    return(new_B)
+    
 }
 
 # compute attachments matrix C at maximum likelihood given B and D
-compute.C <- function( B, D, alpha = 10^-3, beta = 10^-3 ) {
+compute.C <- function( B, D, alpha = 10^-3, beta = 10^-3, marginalize = FALSE) {
     
     # determine indeces to order D such that it matches B
     idx_srt <- as.integer(colnames(B)[2:ncol(B)])
     
     # go through each patient and compute likelihood for all possible attachments
     lik_matrix <- array(0L,c(nrow(D),ncol(B)))
-    curr_D <- cbind(rep(1,nrow(D[,idx_srt,drop=FALSE])),D[,idx_srt,drop=FALSE])
+    curr_D <- cbind(rep(1,nrow(D)),D[,idx_srt,drop=FALSE])
     for(k in seq_len(nrow(B))) {
         curr_C = matrix(rep(0L,nrow(B)),nrow=1)
         curr_C[1,k] <- 1L
         r_D_tilde <- (curr_C%*%B)*2
         sum_cell <- as.matrix(sweep(curr_D,MARGIN=2,r_D_tilde,"+"))
-        lik_matrix[,k] <- (beta^rowsums(sum_cell==2)) * ((1-beta)^rowsums(sum_cell==0)) * ((alpha)^rowsums(sum_cell==1)) * ((1-alpha)^rowsums(sum_cell==3))
+        lik_matrix[,k] <- log(beta^Rfast::rowsums(sum_cell==2)) +
+            log((1-beta)^Rfast::rowsums(sum_cell==0)) + 
+            log((alpha)^Rfast::rowsums(sum_cell==1)) + 
+            log((1-alpha)^Rfast::rowsums(sum_cell==3))
     }
-
+    
     # compute maximum likelihood attachments
-    C <- rowMaxs(lik_matrix,value=FALSE)
+    C <- Rfast::rowMaxs(lik_matrix,value=FALSE)
     storage.mode(C) <- "integer"
-    lik <- sum(log(rowMaxs(lik_matrix,value=TRUE)))
+    
+    lik <- sum(Rfast::rowMaxs(lik_matrix,value=TRUE))
+    
+    if(marginalize==TRUE) {
+        lik_time <- sum(Rfast::rowsums(lik_matrix))
+    }
+    else {
+        lik_time <- sum(Rfast::rowMaxs(lik_matrix,value=TRUE))
+    }
     
     # return maximum likelihood attachments
     return(list(C=C,lik=lik))
