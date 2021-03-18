@@ -15,16 +15,17 @@ alpha = c(0.01,0.05)
 beta = c(0.01,0.05)
 
 # perform the inference
-inference = VERSO(D = variants,
-                  alpha = alpha,
-                  beta = beta,
-                  check_indistinguishable = TRUE,
-                  num_rs = 5,
-                  num_iter = 100,
-                  n_try_bs = 50,
-                  num_processes = 1,
-                  seed = 12345,
-                  verbose = TRUE)
+inference = VERSO( D = variants, 
+                   alpha = alpha, 
+                   beta = beta, 
+                   check_indistinguishable = TRUE, 
+                   marginalize = FALSE, 
+                   num_rs = 5, 
+                   num_iter = 100, 
+                   n_try_bs = 50, 
+                   num_processes = 1, 
+                   verbose = TRUE, 
+                   log_file = "log.txt" )
 
 # plotting the inferred phylogenetic tree
 plot(inference$phylogenetic_tree)
