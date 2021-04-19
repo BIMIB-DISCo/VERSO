@@ -33,6 +33,7 @@ learn.VERSO.phylogenetic.tree <- function( D,
                   beta = beta, 
                   initialization = initialization, 
                   marginalize = marginalize, 
+                  num_rs = num_rs, 
                   num_iter = num_iter, 
                   n_try_bs = n_try_bs, 
                   rs_i = x, 
@@ -43,7 +44,8 @@ learn.VERSO.phylogenetic.tree <- function( D,
         
         stopCluster(parallel_cl)
         
-    } else {
+    }
+    else {
         mcmc_res <- list()
         for(i in seq_len(num_rs)) {
             mcmc_res[[i]] <- MCMC( D = D, 
@@ -51,11 +53,12 @@ learn.VERSO.phylogenetic.tree <- function( D,
                                    beta = beta, 
                                    initialization = initialization, 
                                    marginalize = marginalize, 
+                                   num_rs = num_rs, 
                                    num_iter = num_iter, 
                                    n_try_bs = n_try_bs, 
                                    rs_i = i, 
                                    verbose = verbose, 
-                                   log_file=log_file )
+                                   log_file = log_file )
         }
     }
 
@@ -66,7 +69,8 @@ learn.VERSO.phylogenetic.tree <- function( D,
         }
         idx_bjl <- which(best_lik == max(best_lik))
         best_mcmc <- mcmc_res[[idx_bjl[1]]]
-    } else {
+    }
+    else {
         best_mcmc <-  mcmc_res[[1]]
     }
     
@@ -104,7 +108,7 @@ MCMC <- function( D,
     }
 
     # compute C given B
-    res <- compute.C(B,D,alpha,beta)
+    res <- compute.C(B,D,alpha,beta,marginalize)
     C <- res$C
     lik <- res$lik
     
@@ -132,7 +136,7 @@ MCMC <- function( D,
         B_tmp <- move.B(B)
         
         # compute C at maximun likelihood given B_tmp and returns its likelihood
-        res <- compute.C(B_tmp,D,alpha,beta)
+        res <- compute.C(B_tmp,D,alpha,beta,marginalize)
         C_tmp <- res$C
         lik_tmp <- res$lik
         
@@ -171,7 +175,9 @@ MCMC <- function( D,
         }
         j = j + 1
     }
+
     return(list(B=B_best,C=C_best,log_likelihood=lik_best))
+    
 }
 
 # randomly initialize B

@@ -94,11 +94,11 @@ VERSO <- function( D,
         else {
             num_processes <- min(num_processes,num_rs)
         }
-        
         if(verbose && num_processes>1) {
             cat("Executing",num_processes,"processes via parallel...","\n", file = log_file, append = T)
         }
-    } else {
+    }
+    else {
         num_processes = 1
     }
     
@@ -143,7 +143,7 @@ VERSO <- function( D,
     adjacency_matrix[1,2] = 1
     initialization <- as.B(adj_matrix=adjacency_matrix,D=D)
 
-    # sequential computation
+    # perform the inference
     inference <- list()
     for(i in seq_len(length(alpha))) {
         
