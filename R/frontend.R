@@ -22,6 +22,11 @@
 #' @param beta False negative error rate provided as a verctor; if a vector of beta (and alpha) 
 #' is provided, the inference is performed 
 #' for multiple values and the solution at maximum-likelihood is returned.
+#' @param initialization Binary matrix representing a perfect philogeny tree; genotypes are rows and mutations are columns. 
+#' This parameter overrides "random_tree". 
+#' @param random_tree Boolean. Shall I start MCMC search from a random tree? If FALSE (default) and initialization is NULL, search 
+#' is started from a TRaIT tree (BMC Bioinformatics . 2019 Apr 25;20(1):210.  doi: 10.1186/s12859-019-2795-4). 
+#' @param keep_equivalent Boolean. Shall I return results (B and C) at equivalent likelihood with the best returned solution?
 #' @param check_indistinguishable Boolean. Shall I remove any indistinguishable variant 
 #' from input data prior inference?
 #' @param marginalize Boolean. Shall I marginalize C when computing likelihood?
@@ -32,14 +37,15 @@
 #' this parameter needs to be set to either 1, NA or NULL.
 #' @param verbose Boolean. Shall I print to screen information messages during the execution?
 #' @param log_file log file where to print outputs when using parallel. If parallel execution is disabled, this parameter is ignored.
-#' @return A list of 8 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, 
+#' @return A list of 9 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, 
 #' genotypes_summary, log_likelihood and error_rates. Here, B returns the maximum likelihood variants tree 
 #' (inner nodes of the phylogenetic tree), C the attachment of patients to genotypes and phylogenetic_tree VERSO 
 #' phylogenetic tree, including both variants tree and patients attachments to variants; corrected_genotypes is the 
 #' corrected genotypes, which corrects D given VERSO phylogenetic tree, genotypes_prevalence the number of patients 
 #' and observed prevalence of each genotype and genotypes_summary provide a summary of association of mutations 
-#' to genotypes; finally log_likelihood and error_rates return the likelihood of the inferred phylogenetic moldel and 
-#' best values of alpha and beta as estimated by VERSO.
+#' to genotypes. In equivalent_solutions, solutions (B and C) with likelihood equivalent to the best solution are returned. 
+#' Finally log_likelihood and error_rates return the likelihood of the inferred phylogenetic moldel and best values of alpha and beta 
+#' as estimated by VERSO.
 #' @export VERSO
 #' @import ape
 #' @import parallel
@@ -49,6 +55,9 @@
 VERSO <- function( D, 
                    alpha = NULL, 
                    beta = NULL, 
+                   initialization = NULL, 
+                   random_tree = FALSE, 
+                   keep_equivalent = TRUE, 
                    check_indistinguishable = TRUE, 
                    marginalize = FALSE,
                    num_rs = 10, 
@@ -101,47 +110,52 @@ VERSO <- function( D,
     else {
         num_processes = 1
     }
-    
-    # set initial tree from where to start MCMC search
-    data <- D
-    data[which(is.na(data))] <- 0
-    marginal_probs <- matrix(colSums(data,na.rm=TRUE)/nrow(data),ncol=1)
-    rownames(marginal_probs) <- colnames(data)
-    colnames(marginal_probs) <- "Frequency"
-    joint_probs <- array(NA,c(ncol(data),ncol(data)))
-    rownames(joint_probs) <- colnames(data)
-    colnames(joint_probs) <- colnames(data)
-    for (i in seq_len(ncol(data))) {
-        for (j in seq_len(ncol(data))) {
-            val1 <- data[,i]
-            val2 <- data[,j]
-            joint_probs[i,j] <- (t(val1)%*%val2)
+
+    # if initiatilation is NULL and we do not require a random tree, we initializa with TRaIT tree
+    if(is.null(initialization) && !random_tree) {
+
+        # set initial tree from where to start MCMC search
+        data <- D
+        data[which(is.na(data))] <- 0
+        marginal_probs <- matrix(colSums(data,na.rm=TRUE)/nrow(data),ncol=1)
+        rownames(marginal_probs) <- colnames(data)
+        colnames(marginal_probs) <- "Frequency"
+        joint_probs <- array(NA,c(ncol(data),ncol(data)))
+        rownames(joint_probs) <- colnames(data)
+        colnames(joint_probs) <- colnames(data)
+        for (i in seq_len(ncol(data))) {
+            for (j in seq_len(ncol(data))) {
+                val1 <- data[,i]
+                val2 <- data[,j]
+                joint_probs[i,j] <- (t(val1)%*%val2)
+            }
         }
-    }
-    joint_probs <- joint_probs/nrow(data)
-    adjacency_matrix <- array(0,c(ncol(data),ncol(data)))
-    rownames(adjacency_matrix) <- colnames(data)
-    colnames(adjacency_matrix) <- colnames(data)
-    pmi <- joint_probs
-    for(i in seq_len(nrow(pmi))) {
-        for(j in seq_len(ncol(pmi))) {
-            pmi[i,j] <- log(joint_probs[i,j]/(marginal_probs[i,"Frequency"]*marginal_probs[j,"Frequency"]))
+        joint_probs <- joint_probs/nrow(data)
+        adjacency_matrix <- array(0,c(ncol(data),ncol(data)))
+        rownames(adjacency_matrix) <- colnames(data)
+        colnames(adjacency_matrix) <- colnames(data)
+        pmi <- joint_probs
+        for(i in seq_len(nrow(pmi))) {
+            for(j in seq_len(ncol(pmi))) {
+                pmi[i,j] <- log(joint_probs[i,j]/(marginal_probs[i,"Frequency"]*marginal_probs[j,"Frequency"]))
+            }
         }
-    }
-    ordering <- names(sort(marginal_probs[,"Frequency"],decreasing=TRUE))
-    adjacency_matrix <- adjacency_matrix[ordering,ordering]
-    adjacency_matrix[1,2] = 1
-    if(nrow(adjacency_matrix)>2) {
-        for(i in 3:nrow(adjacency_matrix)) {
-            curr_c <- rownames(adjacency_matrix)[i]
-            curr_candidate_p <- rownames(adjacency_matrix)[seq_len((i-1))]
-            adjacency_matrix[names(which.max(pmi[curr_candidate_p,curr_c]))[1],curr_c] <- 1
+        ordering <- names(sort(marginal_probs[,"Frequency"],decreasing=TRUE))
+        adjacency_matrix <- adjacency_matrix[ordering,ordering]
+        adjacency_matrix[1,2] = 1
+        if(nrow(adjacency_matrix)>2) {
+            for(i in 3:nrow(adjacency_matrix)) {
+                curr_c <- rownames(adjacency_matrix)[i]
+                curr_candidate_p <- rownames(adjacency_matrix)[seq_len((i-1))]
+                adjacency_matrix[names(which.max(pmi[curr_candidate_p,curr_c]))[1],curr_c] <- 1
+            }
         }
+        adjacency_matrix <- rbind(rep(0,nrow(adjacency_matrix)),adjacency_matrix)
+        adjacency_matrix <- cbind(rep(0,nrow(adjacency_matrix)),adjacency_matrix)
+        adjacency_matrix[1,2] = 1
+        initialization <- as.B(adj_matrix=adjacency_matrix,D=D)
+        
     }
-    adjacency_matrix <- rbind(rep(0,nrow(adjacency_matrix)),adjacency_matrix)
-    adjacency_matrix <- cbind(rep(0,nrow(adjacency_matrix)),adjacency_matrix)
-    adjacency_matrix[1,2] = 1
-    initialization <- as.B(adj_matrix=adjacency_matrix,D=D)
 
     # perform the inference
     inference <- list()
@@ -155,6 +169,7 @@ VERSO <- function( D,
                                                          alpha = alpha[i], 
                                                          beta = beta[i], 
                                                          initialization = initialization, 
+                                                         keep_equivalent = keep_equivalent, 
                                                          marginalize = marginalize, 
                                                          num_rs = num_rs, 
                                                          num_iter = num_iter, 
@@ -207,11 +222,39 @@ VERSO <- function( D,
         i = i + 1
     }
     
-    # finally build VERSO phylogenetic tree
+    # build VERSO phylogenetic tree
     phylogenetic_tree <- get.phylo(adjacency_matrix=as.adj.matrix(B),valid_genotypes=B,samples_attachments=C)
+
+    # finally, process equivalent solutions
+    if(keep_equivalent == TRUE) {
+        equivalent_solutions <- inference[["equivalent_solutions"]]
+        
+        eq_sol_df <- do.call(rbind,  lapply(equivalent_solutions, function(x) {
+            adjM <- as.adj.matrix(x$B,sorting=TRUE)
+            return(as.vector(adjM))
+        }))
+        
+        idx_uniq_sol <- which(!duplicated(eq_sol_df))
+        
+        equivalent_solutions <- equivalent_solutions[idx_uniq_sol]
+        
+        if(length(equivalent_solutions)==1) { # if we have only the best solution (no other equivalent solutions)
+            equivalent_solutions <- list()
+        } else {
+            
+            for(i in 1:length(equivalent_solutions)) {
+                rownames(equivalent_solutions[[i]][["B"]]) <- paste0("G",seq_len(nrow(equivalent_solutions[[i]][["B"]])))
+                colnames(equivalent_solutions[[i]][["B"]]) <- c("Reference",colnames(D)[as.numeric(colnames(equivalent_solutions[[i]][["B"]])[2:ncol(equivalent_solutions[[i]][["B"]])])])
+            }
+        }
+        
+    } else {
+        
+        equivalent_solutions <- NULL   
+    }
     
     # return results of the inference
-    results <- list(B=B,C=C,phylogenetic_tree=phylogenetic_tree,corrected_genotypes=corrected_genotypes,genotypes_prevalence=genotypes_prevalence,genotypes_summary=genotypes_summary,log_likelihood=log_likelihood,error_rates=error_rates)
+    results <- list(B=B,C=C,phylogenetic_tree=phylogenetic_tree,corrected_genotypes=corrected_genotypes,genotypes_prevalence=genotypes_prevalence,genotypes_summary=genotypes_summary,log_likelihood=log_likelihood,equivalent_solutions=equivalent_solutions,error_rates=error_rates)
     return(results)
     
 }
