@@ -8,6 +8,9 @@ VERSO(
   D,
   alpha = NULL,
   beta = NULL,
+  initialization = NULL,
+  random_tree = FALSE,
+  keep_equivalent = TRUE,
   check_indistinguishable = TRUE,
   marginalize = FALSE,
   num_rs = 10,
@@ -30,6 +33,14 @@ for multiple values and the solution at maximum-likelihood is returned.}
 is provided, the inference is performed 
 for multiple values and the solution at maximum-likelihood is returned.}
 
+\item{initialization}{Binary matrix representing a perfect philogeny tree; genotypes are rows and mutations are columns. 
+This parameter overrides "random_tree".}
+
+\item{random_tree}{Boolean. Shall I start MCMC search from a random tree? If FALSE (default) and initialization is NULL, search 
+is started from a TRaIT tree (BMC Bioinformatics . 2019 Apr 25;20(1):210.  doi: 10.1186/s12859-019-2795-4).}
+
+\item{keep_equivalent}{Boolean. Shall I return results (B and C) at equivalent likelihood with the best returned solution?}
+
 \item{check_indistinguishable}{Boolean. Shall I remove any indistinguishable variant 
 from input data prior inference?}
 
@@ -49,14 +60,15 @@ this parameter needs to be set to either 1, NA or NULL.}
 \item{log_file}{log file where to print outputs when using parallel. If parallel execution is disabled, this parameter is ignored.}
 }
 \value{
-A list of 8 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, 
+A list of 9 elements: B, C, phylogenetic_tree, corrected_genotypes, genotypes_prevalence, 
 genotypes_summary, log_likelihood and error_rates. Here, B returns the maximum likelihood variants tree 
 (inner nodes of the phylogenetic tree), C the attachment of patients to genotypes and phylogenetic_tree VERSO 
 phylogenetic tree, including both variants tree and patients attachments to variants; corrected_genotypes is the 
 corrected genotypes, which corrects D given VERSO phylogenetic tree, genotypes_prevalence the number of patients 
 and observed prevalence of each genotype and genotypes_summary provide a summary of association of mutations 
-to genotypes; finally log_likelihood and error_rates return the likelihood of the inferred phylogenetic moldel and 
-best values of alpha and beta as estimated by VERSO.
+to genotypes. In equivalent_solutions, solutions (B and C) with likelihood equivalent to the best solution are returned. 
+Finally log_likelihood and error_rates return the likelihood of the inferred phylogenetic moldel and best values of alpha and beta 
+as estimated by VERSO.
 }
 \description{
 Perform the inference of the maximum log-likelihood VERSO phylogenetic tree.

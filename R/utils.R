@@ -87,13 +87,13 @@ get.phylo <- function( adjacency_matrix, valid_genotypes, samples_attachments ) 
 }
 
 # convert B to an adjacency matrix
-as.adj.matrix <- function( B ) {
-
+as.adj.matrix <- function( B, sorting = FALSE) {
+    
     # create the data structure where to save the adjacency matrix obtained from B
     adj_matrix <- array(0L,dim(B))
     rownames(adj_matrix) <- colnames(B)
     colnames(adj_matrix) <- colnames(B)
-
+    
     # set arcs in the adjacency matrix
     for(i in seq_len((nrow(B)-1))) {
         for(j in ((i+1):nrow(B))) {
@@ -102,10 +102,16 @@ as.adj.matrix <- function( B ) {
             }
         }
     }
-
+    
+    if(sorting == TRUE) {
+        # keeping root on the first place
+        ord <- c(1,1+order(colnames(adj_matrix)[-1]))
+        adj_matrix <- adj_matrix[ord,ord]
+    }
+    
     # return the adjacency matrix obtained from B
     return(adj_matrix)
-
+    
 }
 
 # build B from an adjacency matrix where we assume genotypes and mutations to be both ordered
