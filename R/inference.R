@@ -25,7 +25,7 @@ learn.VERSO.phylogenetic.tree <- function( D,
         
         parallel_cl <- makeCluster(num_processes,outfile=log_file)
         
-        clusterExport(parallel_cl,varlist=c("D","lik_w","alpha","beta","initialization","keep_equivalent","marginalize","num_rs","num_iter","n_try_bs","verbose","log_file"),envir=environment())
+        clusterExport(parallel_cl,varlist=c("D","alpha","beta","initialization","keep_equivalent","marginalize","num_rs","num_iter","n_try_bs","verbose","log_file"),envir=environment())
         clusterExport(parallel_cl,c("MCMC","initialize.B","move.B", "relabeling", "prune.and.reattach", "compute.C"),envir=environment())
         clusterSetRNGStream(parallel_cl,iseed=round(runif(1)*100000))
         
