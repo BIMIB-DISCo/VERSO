@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">VERSO</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -81,16 +81,16 @@
       <h1 data-toc-skip>Running VERSO</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/BIMIB-DISCo/VERSO/blob/master/vignettes/2_running_VERSO.Rmd" class="external-link"><code>vignettes/2_running_VERSO.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/BIMIB-DISCo/VERSO/blob/HEAD/vignettes/2_running_VERSO.Rmd" class="external-link"><code>vignettes/2_running_VERSO.Rmd</code></a></small>
       <div class="hidden name"><code>2_running_VERSO.Rmd</code></div>
 
     </div>
 
     
     
-<div id="example-of-phylogenetic-inference-by-verso" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example-of-phylogenetic-inference-by-verso" class="anchor" aria-hidden="true"></a>Example of phylogenetic inference by VERSO</h2>
+<div class="section level2">
+<h2 id="example-of-phylogenetic-inference-by-verso">Example of phylogenetic inference by VERSO<a class="anchor" aria-label="anchor" href="#example-of-phylogenetic-inference-by-verso"></a>
+</h2>
 <p>We now present an example of phylogenetic analysis by VERSO using mutation data from a set of SARS-CoV-2 samples; the dataset includes variants for a selected set of 15 SARS-CoV-2 samples obtained by variant calling from raw data available from NCBI BioProject PRJNA610428.</p>
 <p>We first load the data. Notice that the input data to VERSO is an array reporting variants either observed (as 1 in the matrix), not observed (as 0) or missing (as NA, i.e., due to low coverage).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -101,10 +101,10 @@
 <code class="sourceCode R"><span class="va">alpha</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.01</span>,<span class="fl">0.05</span><span class="op">)</span>
 <span class="va">beta</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.01</span>,<span class="fl">0.05</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 0.01 0.05</code></pre>
+<pre><code><span class="co">## [1] 0.01 0.05</span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">beta</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] 0.01 0.05</code></pre>
+<pre><code><span class="co">## [1] 0.01 0.05</span></code></pre>
 <p>We can now perform the inference as follow. Make sure to set the random seed to ensure reproducibility.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span>
@@ -121,9 +121,9 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">inference</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">inference</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "B"                    "C"                    "phylogenetic_tree"   
-## [4] "corrected_genotypes"  "genotypes_prevalence" "genotypes_summary"   
-## [7] "log_likelihood"       "error_rates"</code></pre>
+<pre><code><span class="co">## [1] "B"                    "C"                    "phylogenetic_tree"   </span>
+<span class="co">## [4] "corrected_genotypes"  "genotypes_prevalence" "genotypes_summary"   </span>
+<span class="co">## [7] "log_likelihood"       "error_rates"</span></code></pre>
 <p>VERSO returns a list of 8 elements as results. Namely, B, C, phylogenetic tree, corrected genotypes, genotypes prevalence, genotypes summary, log likelihood and error rates. Here, B returns the maximum likelihood variants tree (inner nodes of the phylogenetic tree), C the attachment of patients to genotypes and phylogenetic tree VERSO phylogenetic tree, including both variants tree and patients attachments to variants; corrected genotypes is the corrected genotypes, which corrects D given VERSO phylogenetic tree, genotypes prevalence the number of patients and observed prevalence of each genotype and genotypes summary provide a summary of association of mutations to genotypes; finally log likelihood and error rates return the likelihood of the inferred phylogenetic moldel and best values of alpha and beta as estimated by VERSO.</p>
 <p>We can plot the inferred phylogetic tree using the function plot from the package ape.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -149,7 +149,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>
