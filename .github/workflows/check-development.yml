@@ -156,6 +156,7 @@ jobs:
 
       - name: Install R packages
         run: |
+          install.packages('rcmdcheck')
           install.packages('Rfast')
         shell: Rscript {0}
 
@@ -362,7 +363,7 @@ jobs:
       - name: Setup R from r-lib
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: ${{ needs.R-CMD-check-bioc.outputs.rversion }}
+          r-version: ${{ matrix.config.r }}
 
       - name: Setup pandoc from r-lib
         uses: r-lib/actions/setup-pandoc@v2
