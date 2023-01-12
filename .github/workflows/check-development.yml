@@ -156,7 +156,9 @@ jobs:
 
       - name: Install R packages
         run: |
-          install.packages('Rfast',dependencies=TRUE)
+          install.packages('RcppZiggurat')
+          install.packages('Rfast')
+          install.packages('curl')
           install.packages('rcmdcheck')
         shell: Rscript {0}
 
