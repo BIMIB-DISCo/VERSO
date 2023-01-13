@@ -156,6 +156,7 @@ jobs:
 
       - name: Install R packages
         run: |
+          install.packages('RcppGSL')
           install.packages('RcppZiggurat')
           install.packages('Rfast')
           install.packages('curl')
