@@ -1,6 +1,23 @@
 ---
-title: Running VERSO
-output: html_document
+title: "Running VERSO"
+author: 
+  - Daniele Ramazzotti
+  - Fabrizio Angaroni
+  - Davide Maspero
+  - Alex Graudenxi
+  - Luca De Sano
+  - Gianluca Ascolani
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+graphics: yes
+package: VERSO
+output:
+  BiocStyle::html_document:
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{Running VERSO}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{VERSO,BiocStyle}
 ---
 
 ## Example of phylogenetic inference by VERSO
