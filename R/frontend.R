@@ -51,6 +51,8 @@
 #' @import parallel
 #' @importFrom Rfast rowMaxs rowsums
 #' @importFrom stats runif dist
+#' @importFrom utils tail
+#' @importFrom data.tree Node
 #'
 VERSO <- function( D, 
                    alpha = NULL, 
