@@ -1,8 +1,10 @@
 Viral Evolution ReconStructiOn (VERSO)
 ================
 
-[![Actions Status](https://github.com/BIMIB-DISCo/VERSO/workflows/check-master/badge.svg)](https://github.com/BIMIB-DISCo/VERSO/actions?query=workflow%3Acheck-master)
-[![Actions Status](https://github.com/BIMIB-DISCo/VERSO/workflows/check-development/badge.svg)](https://github.com/BIMIB-DISCo/VERSO/actions?query=workflow%3Acheck-development)
+| Branch | Status |
+| --- | --- |
+| master | [![R-CMD-check-bioc](https://github.com/BIMIB-DISCo/VERSO/actions/workflows/check-bioc.yml/badge.svg?branch=master)](https://github.com/BIMIB-DISCo/VERSO/actions/workflows/check-bioc.yml) |
+| development | [![R-CMD-check-bioc](https://github.com/BIMIB-DISCo/VERSO/actions/workflows/check-bioc.yml/badge.svg?branch=development)](https://github.com/BIMIB-DISCo/VERSO/actions/workflows/check-bioc.yml) |
 
 In this repository we provide an R implementation of *VERSO*. 
 
