@@ -83,68 +83,68 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>D</dt>
+    <dl><dt id="arg-d">D<a class="anchor" aria-label="anchor" href="#arg-d"></a></dt>
 <dd><p>Input data for the inference reporting presence (as 1), absense (as 0) or missing 
 information (as NA) for a set of variants.</p></dd>
 
 
-<dt>alpha</dt>
+<dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>
 <dd><p>False positive error rate provided as a verctor; if a vector of alpha (and beta) 
 is provided, the inference is performed 
 for multiple values and the solution at maximum-likelihood is returned.</p></dd>
 
 
-<dt>beta</dt>
+<dt id="arg-beta">beta<a class="anchor" aria-label="anchor" href="#arg-beta"></a></dt>
 <dd><p>False negative error rate provided as a verctor; if a vector of beta (and alpha) 
 is provided, the inference is performed 
 for multiple values and the solution at maximum-likelihood is returned.</p></dd>
 
 
-<dt>initialization</dt>
+<dt id="arg-initialization">initialization<a class="anchor" aria-label="anchor" href="#arg-initialization"></a></dt>
 <dd><p>Binary matrix representing a perfect philogeny tree; genotypes are rows and mutations are columns. 
 This parameter overrides "random_tree".</p></dd>
 
 
-<dt>random_tree</dt>
+<dt id="arg-random-tree">random_tree<a class="anchor" aria-label="anchor" href="#arg-random-tree"></a></dt>
 <dd><p>Boolean. Shall I start MCMC search from a random tree? If FALSE (default) and initialization is NULL, search 
 is started from a TRaIT tree (BMC Bioinformatics . 2019 Apr 25;20(1):210.  doi: 10.1186/s12859-019-2795-4).</p></dd>
 
 
-<dt>keep_equivalent</dt>
+<dt id="arg-keep-equivalent">keep_equivalent<a class="anchor" aria-label="anchor" href="#arg-keep-equivalent"></a></dt>
 <dd><p>Boolean. Shall I return results (B and C) at equivalent likelihood with the best returned solution?</p></dd>
 
 
-<dt>check_indistinguishable</dt>
+<dt id="arg-check-indistinguishable">check_indistinguishable<a class="anchor" aria-label="anchor" href="#arg-check-indistinguishable"></a></dt>
 <dd><p>Boolean. Shall I remove any indistinguishable variant 
 from input data prior inference?</p></dd>
 
 
-<dt>marginalize</dt>
+<dt id="arg-marginalize">marginalize<a class="anchor" aria-label="anchor" href="#arg-marginalize"></a></dt>
 <dd><p>Boolean. Shall I marginalize C when computing likelihood?</p></dd>
 
 
-<dt>num_rs</dt>
+<dt id="arg-num-rs">num_rs<a class="anchor" aria-label="anchor" href="#arg-num-rs"></a></dt>
 <dd><p>Number of restarts during MCMC inference.</p></dd>
 
 
-<dt>num_iter</dt>
+<dt id="arg-num-iter">num_iter<a class="anchor" aria-label="anchor" href="#arg-num-iter"></a></dt>
 <dd><p>Maximum number of MCMC steps to be performed during the inference.</p></dd>
 
 
-<dt>n_try_bs</dt>
+<dt id="arg-n-try-bs">n_try_bs<a class="anchor" aria-label="anchor" href="#arg-n-try-bs"></a></dt>
 <dd><p>Number of steps without changes in likelihood of best solution after which to stop the MCMC.</p></dd>
 
 
-<dt>num_processes</dt>
+<dt id="arg-num-processes">num_processes<a class="anchor" aria-label="anchor" href="#arg-num-processes"></a></dt>
 <dd><p>Number of processes to be used during parallel execution. To execute in single process mode, 
 this parameter needs to be set to either 1, NA or NULL.</p></dd>
 
 
-<dt>verbose</dt>
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p>Boolean. Shall I print to screen information messages during the execution?</p></dd>
 
 
-<dt>log_file</dt>
+<dt id="arg-log-file">log_file<a class="anchor" aria-label="anchor" href="#arg-log-file"></a></dt>
 <dd><p>log file where to print outputs when using parallel. If parallel execution is disabled, this parameter is ignored.</p></dd>
 
 </dl></div>
