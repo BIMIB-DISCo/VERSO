@@ -1,39 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/v1_introduction.html</loc>
-  </url>
-  <url>
-    <loc>/articles/v2_running_VERSO.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/VERSO.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/inference.html</loc>
-  </url>
-  <url>
-    <loc>/reference/variants.html</loc>
-  </url>
-  <url>
-    <loc>/reference/write.newick.tree.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/v1_introduction.html</loc></url>
+<url><loc>/articles/v2_running_VERSO.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/VERSO.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/inference.html</loc></url>
+<url><loc>/reference/variants.html</loc></url>
+<url><loc>/reference/write.newick.tree.html</loc></url>
 </urlset>
+
