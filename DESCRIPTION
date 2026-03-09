@@ -1,6 +1,6 @@
 Package: VERSO
-Version: 1.21.0
-Date: 2025-10-15
+Version: 1.21.1
+Date: 2026-03-09
 Title: Viral Evolution ReconStructiOn (VERSO)
 Authors@R: c(person("Daniele", "Ramazzotti", role=c("aut"),email="daniele.ramazzotti@unimib.it",
                 comment = c(ORCID = "0000-0002-6087-2666")),
@@ -43,5 +43,5 @@ biocViews:
     BiomedicalInformatics,
     Sequencing,
     SomaticMutation
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr
