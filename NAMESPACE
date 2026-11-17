@@ -4,9 +4,13 @@ export(VERSO)
 export(write.newick.tree)
 import(ape)
 import(parallel)
-importFrom(Rfast,rowMaxs)
-importFrom(Rfast,rowsums)
+importFrom(Rfast,
+  rowMaxs,
+  rowsums
+)
 importFrom(data.tree,Node)
-importFrom(stats,dist)
-importFrom(stats,runif)
+importFrom(stats,
+  dist,
+  runif
+)
 importFrom(utils,tail)
